@@ -1,5 +1,4 @@
 const express = require('express')
-const { body, validationResult } = require('express-validator')
 const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
 
@@ -21,7 +20,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
     console.log("Connected!")
 
     const db = client.db("noodles")
-    const companies = db.collection("order_history")
+    const history = db.collection("order_histories")
 
     app.get('/', (req, res) => {
         res.sendFile(__dirname + '/order.html')
@@ -31,11 +30,11 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         var query = req.body
         query.phone = query.phone.replace(/\D/g,'')
 
-        console.log(query)
+        console.log("Query: " + query)
 
-        companies.find(query).toArray(function(err, result) {
+        history.find(query).toArray(function(err, result) {
             if (err) console.log("Query err: " + err)
-            console.log(result)
+            console.log("Result: " + result)
 
             var html = "<!DOCTYPE html>" +
                        "<html><head><title>Query Results</title></head><body>"
@@ -43,10 +42,16 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                 html += "<h1>Order Noods!</h1><h2>Sorry, " + query.fname + ", our query didn't return any results! Please make sure your information is correct and try again, or continue without lookup.</h2>"
             }
             else {
-                html += "<h1>Order Noods!</h1><h2>Welcome back, " + result.fname + "! Here are your past orders:</h2>"
-                const past_orders = result.past_orders
-                result.forEach((past_orders, i) => {
-                    html += "<div>Order #: " + i + ", Dishes ordered: " + past_orders + "</div><br>"
+                html += "<h1>Order Noods!</h1><h2>Welcome back, " + query.fname + "! Here are your past orders:</h2>"
+                const past_orders = result[0].past_orders
+                console.log(past_orders)
+                past_orders.forEach((order, i) => {
+                    html += "<div>Order #" + i + ":<br>Dishes ordered: <div style='margin-left:20px'>"
+                    for (const [key, value] of Object.entries(order)) {
+                        console.log(key, value);
+                        html += value + " " + key + "<br>"
+                    }
+                    html += "</p></div>"
                 })
             }
             html += "</body><footer>" +
