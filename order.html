@@ -10,11 +10,11 @@
     <h2>Tell us your name and phone number so we can look you up! This will make ordering the same thing you have ordered in the past super easy.</h2>
     <form action="/order.html" method="POST">
         <label for="fname">First Name</label><br>
-        <input type="text" name="fname" required><br>
+        <input type="text" name="fname" id="fname" pattern="[A-Za-z]+" required><br>
         <label for="lname">Last Name</label><br>
-        <input type="text" name="lname" required><br>
+        <input type="text" name="lname" id="lname" pattern="[A-Za-z]+" required><br>
         <label for="phone">Phone Number</label><br>
-        <input type="text" name="phone" pattern="[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$" required /><br>
+        <input type="text" name="phone" id="phone" pattern="[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}" required /><br>
 
         <button type="submit">Look me up!</button>
     </form>
@@ -24,6 +24,24 @@
         <button type="submit">Continue without lookup</button>
     </form>
     <br>
+
+    <script type="text/javascript">
+        // message for invalid first name
+        var input = document.getElementById('fname')
+        input.oninvalid = function(event) {
+            event.target.setCustomValidity("Please enter a valid first name")
+        }
+        // message for invalid last name
+        var input = document.getElementById('lname')
+        input.oninvalid = function(event) {
+            event.target.setCustomValidity("Please enter a valid last name")
+        }
+        // message for invalid phone number
+        var input = document.getElementById('phone')
+        input.oninvalid = function(event) {
+            event.target.setCustomValidity("Please enter a valid phone number")
+        }
+    </script>
 </body>
 <footer>
     &#169; Copyright 2020 Noods To Go
