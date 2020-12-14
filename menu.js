@@ -23,6 +23,7 @@ async function getDishes()
         if ((await curs.count()) === 0) {
             console.log("No documents found");
         }
+        output += "<link rel ='stylesheet' type ='text/css' href='menu.css'>";
         output += "<div class='second-div'>";
         var c = 0;
         await curs.forEach(function(item) {
@@ -58,7 +59,7 @@ async function getDishes()
 async function displayDishes(response){
     var myDishes = await getDishes();
     response.writeHead(200, {'Content-Type': 'text/html'});
-    response.write("<link rel ='stylesheet' type ='text/css' href='menu.css'>" + myDishes);
+    response.write(myDishes);
 }
 
 module.exports = {displayDishes};
