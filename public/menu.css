@@ -63,5 +63,7 @@ body {
 
 footer {
     margin-top: 5em;
+    font-family: 'Exo';
+    font-size: .75em;
     text-align: center;
 }
