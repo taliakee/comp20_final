@@ -8,8 +8,8 @@
         <script language="javascript">
         function MenuItem(name, cost)
         {
-            this.name = name;
-            this.cost = cost;
+            this.name = name
+            this.cost = cost
         }
 
         var dishes
@@ -21,12 +21,12 @@
 
         function makeSelect(name, minRange, maxRange)
         {
-            var t= "";
-            t = "<select name='" + name + "' size='1'>";
-            for (j=minRange; j<=maxRange; j++)
-            t += "<option>" + j + "</option>";
-            t+= "</select>";
-            return t;
+            var t= ""
+            t = "<select name='" + name + "' size='1'>"
+            for (j = minRange j <= maxRange j++)
+            t += "<option>" + j + "</option>"
+            t += "</select>"
+            return t
         }
     </script>
 
@@ -45,25 +45,26 @@
             </tr>
             <script language="javascript">
 
-            var s = "";
+            var s = ""
             menuItems.forEach((item, i) => {
-                s += "<tr><td>";
-                s += makeSelect("dish", 0, 10);
-                s += "</td><td>" + item.name + "</td>";
-                s += "<td> $ " + item.cost.toFixed(2) + "</td>";
-                s += "<td>$ 0.00</td></tr>";
+                s += "<tr><td>"
+                s += makeSelect("dish", 0, 10)
+                s += "</td><td>" + item.name + "</td>"
+                s += "<td> $ " + item.cost.toFixed(2) + "</td>"
+                s += "<td>$ 0.00</td></tr>"
             })
 
-            document.writeln(s);
+            document.writeln(s)
         </script>
     </table>
     <p>Subtotal:
-        $<input type="text"  name='subtotal' id="subtotal" />
+        $ <input type="text"  name='subtotal' id="subtotal" />
     </p>
     <p>Mass tax 6.25%:
         $ <input type="text"  name='tax' id="tax" />
     </p>
-    <p>Total: $ <input type="text"  name='total' id="total" />
+    <p>Total:
+        $ <input type="text"  name='total' id="total" />
     </p>
 
     <button type="submit">Submit Order</button>
@@ -88,12 +89,12 @@
                 rows[i + 1].lastChild.innerHTML = "$ " + (dropdown.value * menuItems[i].cost).toFixed(2)
                 calculateTotal()
             }
-        });
+        })
 
         var total = 0
         function calculateTotal() {
             var subtotal = 0
-            for (var i = 1; i < rows.length; i++) {
+            for (var i = 1 i < rows.length i++) {
                 var price = parseFloat(rows[i].lastChild.innerHTML.substr(2))
                 subtotal += price ? price : 0
             }
@@ -122,24 +123,6 @@
         var input = document.getElementById('email')
         input.oninvalid = function(event) {
             event.target.setCustomValidity("Please enter a valid email")
-        }
-
-        var submitButton = document.querySelector("submit[type='submit']")
-        submitButton.onclick = function() {
-            // thank you, recap of order, total
-            var str = "<h1>Thank you for your order!</h1>" +
-                      "<p>You got:<br>"
-
-            dropdowns.forEach((item, i) => {
-                if (item.value > 0) {
-                    str += item.value + " " + menuItems[i].name + "<br>"
-                }
-            });
-            str += "</p>"
-
-            document.write(str)
-
-            document.write("<p>Your total was: $" + total.toFixed(2) + "</p>")
         }
     </script>
     </body>
