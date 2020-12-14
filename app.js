@@ -16,8 +16,9 @@ app.get('/hoursandlocations', (req, res) => {
     res.sendFile(__dirname + '/hoursandlocations.html');
 })
 
-app.get('/menu', (req, res) => {
-    res.send(menu.displayDishes(res));
+app.get('/menu', async (req, res) => {
+    var myDishes = await menu.displayDishes(res);
+    res.send(myDishes);
     // res.sendFile(__dirname + '/menu.html');
 })
 
