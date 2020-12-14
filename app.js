@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
     res.send("This will have our index page");
 })
 
-app.get("/hoursandlocations", (req, res) => {
+app.get('/hoursandlocations', (req, res) => {
     res.sendFile(__dirname, '/hoursandlocations.html');
 })
 
