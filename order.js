@@ -1,10 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
-const fs = require('fs');
-const Transform = require('stream').Transform;
-const parser = new Transform();
-const newLineStream = require('new-line');
+const fs = require('fs')
+const Transform = require('stream').Transform
+const parser = new Transform()
+const newLineStream = require('new-line')
 
 const app = express()
 
@@ -52,7 +52,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                 past_orders.forEach((order, i) => {
                     html += "<div>Order #" + i + ":<br>Dishes ordered: <div style='margin-left:20px'>\n"
                     for (const [key, value] of Object.entries(order)) {
-                        console.log(key, value);
+                        console.log(key, value)
                         html += value + " " + key + "<br>"
                     }
                     html += "<button type='button' onclick='order(" + i + ", " + JSON.stringify(order) + ")'>Reorder</button></p></div>\n"
@@ -85,24 +85,24 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
     })
 
     parser._transform = function(data, encoding, done) {
-      const str = data.toString().replace("var dishes", "var dishes = " + JSON.stringify(dishes) + "");
-      this.push(str);
-      done();
-    };
+      const str = data.toString().replace("var dishes", "var dishes = " + JSON.stringify(dishes) + "")
+      this.push(str)
+      done()
+    }
 
     app.get('/place', (req, res) => {
-        res.write('<!-- Begin stream -->\n');
+        res.write('<!-- Begin stream -->\n')
         fs
         .createReadStream(__dirname + '/place_order.html')
         .pipe(newLineStream())
         .pipe(parser)
         .on('end', () => {
             res.write('\n<!-- End stream -->')
-        }).pipe(res);
+        }).pipe(res)
     })
 
     app.post('/place', (req, res) => {
-        console.log(req.body);
+        console.log(req.body)
         const order = req.body
 
         var str = "<!DOCTYPE html>\n" +
@@ -114,7 +114,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             if (order.dish[i] > 0) {
                 str += order.dish[i] + " " + dish.name + "<br>\n"
             }
-        });
+        })
         str += "</p>"
 
         res.write(str)
