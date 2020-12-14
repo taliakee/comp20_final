@@ -146,6 +146,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                 console.log(query);
             }
             else {
+                history.updateOne({ _id: result[0]._id }, { $addToSet: { past_orders: newOrder } })
             }
         })
     })
