@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Place Order</title>
+    </head>
+    <body>
+        <script language="javascript">
+            function MenuItem(name, cost) {
+                this.name = name;
+                this.cost = cost;
+            }
+
+            var dishes
+
+            var menuItems = new Array()
+            dishes.forEach((dish, i) => {
+                menuItems.push(new MenuItem(dish.name, parseFloat(dish.cost)))
+            })
+
+            function makeSelect(name, minRange, maxRange) {
+                var t = "";
+                t = "<select name='" + name + "' size='1'>";
+                for (j = minRange; j <= maxRange; j++) {
+                    t += "<option>" + j + "</option>";
+                }
+                t += "</select>";
+                return t;
+            }
+        </script>
+
+        <h1>Place Order</h1>
+        <form action="/place" method="post">
+            <p>First Name*: <input type="text" name='fname' id='fname' pattern="[A-Za-z]+" required></p>
+            <p>Last Name*:  <input type="text" name='lname' id='lname' pattern="[A-Za-z]+" required></p>
+            <p>Phone Number*: <input type="text" name='phone' id='phone' pattern="[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}" required></p>
+            <p>Email*: <input type="text" name='email' id='email' pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*" required></p>
+            <table id="dishes" border="0" cellpadding="3">
+                <tr>
+                    <th>Select Item</th>
+                    <th>Item Name</th>
+                    <th>Cost Each</th>
+                    <th>Total Cost</th>
+                </tr>
+                <script language="javascript">
+
+                var s = "";
+                menuItems.forEach((item, i) => {
+                    s += "<tr><td>";
+                    s += makeSelect("dish", 0, 10);
+                    s += "</td><td>" + item.name + "</td>";
+                    s += "<td> $ " + item.cost.toFixed(2) + "</td>";
+                    s += "<td>$ 0.00</td></tr>";
+                })
+
+                document.writeln(s);
+            </script>
+        </table>
+        <p>Subtotal:
+            $ <input type="text"  name='subtotal' id="subtotal" />
+        </p>
+        <p>Mass tax 6.25%:
+            $ <input type="text"  name='tax' id="tax" />
+        </p>
+        <p>Total:
+            $ <input type="text"  name='total' id="total" />
+        </p>
+
+        <button type="submit">Submit Order</button>
+
+        </form><br>
+
+        <script type="text/javascript">
+            document.getElementById('fname').value = window.localStorage.getItem('fname')
+            document.getElementById('lname').value = window.localStorage.getItem('lname')
+            document.getElementById('phone').value = window.localStorage.getItem('phone')
+            document.getElementById('email').value = window.localStorage.getItem('email')
+
+            var rows = document.getElementById("dishes").rows
+            var dropdowns = document.getElementsByName("dish")
+
+            // dropdown onchange listeners
+            dropdowns.forEach((dropdown, i) => {
+                dropdown.onchange = function() {
+                    rows[i + 1].lastChild.innerHTML = "$ " + (dropdown.value * menuItems[i].cost).toFixed(2)
+                    calculateTotal()
+                }
+            });
+
+            // populate order from history if applicable
+            var order = JSON.parse(window.localStorage.getItem('order'))
+            console.log(order);
+
+            menuItems.forEach((item, i) => {
+                for (const [dish, quantity] of Object.entries(order)) {
+                    if (item.name == dish) {
+                        dropdowns[i].value = quantity
+                        dropdowns[i].onchange()
+                    }
+                }
+            })
+
+            // calculate cost of items
+            var total = 0
+            function calculateTotal() {
+                var subtotal = 0
+                for (var i = 1; i < rows.length; i++) {
+                    var price = parseFloat(rows[i].lastChild.innerHTML.substr(2))
+                    subtotal += price ? price : 0
+                }
+                document.getElementById('subtotal').value = subtotal.toFixed(2)
+                document.getElementById('tax').value = (subtotal * .0625).toFixed(2)
+                document.getElementById('total').value = (subtotal * 1.0625).toFixed(2)
+                total = (subtotal * 1.0625)
+            }
+
+            // message for invalid first name
+            var input = document.getElementById('fname')
+            input.oninvalid = function(event) {
+                event.target.setCustomValidity("Please enter a valid first name")
+            }
+            // message for invalid last name
+            var input = document.getElementById('lname')
+            input.oninvalid = function(event) {
+                event.target.setCustomValidity("Please enter a valid last name")
+            }
+            // message for invalid phone number
+            var input = document.getElementById('phone')
+            input.oninvalid = function(event) {
+                event.target.setCustomValidity("Please enter a valid phone number")
+            }
+            // message for invalid email
+            var input = document.getElementById('email')
+            input.oninvalid = function(event) {
+                event.target.setCustomValidity("Please enter a valid email")
+            }
+        </script>
+    </body>
+    <footer>
+        &#169; Copyright 2020 Noods To Go
+    </footer>
+</html>

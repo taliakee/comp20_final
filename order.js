@@ -6,27 +6,12 @@ const Transform = require('stream').Transform
 const parser = new Transform()
 const newLineStream = require('new-line')
 
-const app = express();
-const menu = require("./menu.js");
-
-app.use(bodyParser.urlencoded({ extended: true }))
+const app = express()
 
 app.listen(process.env.PORT || 3000, function() {
     console.log('server is running')
 })
-
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-})
-
-app.get('/hoursandlocations', (req, res) => {
-    res.sendFile(__dirname + '/hoursandlocations.html');
-})
-
-app.get('/menu', async (req, res) => {
-    var myDishes = await menu.displayDishes(res);
-    res.send(myDishes);
-})
+app.use(bodyParser.urlencoded({ extended: true }))
 
 const url = "mongodb+srv://tkee:varu58Ce@cluster0.egogg.mongodb.net/noodles?retryWrites=true&w=majority"
 
