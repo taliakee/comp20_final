@@ -55,23 +55,12 @@ async function getDishes()
 }
 
 
-
+// Writes html for menu
 async function displayDishes(response){
 
     var myDishes = await getDishes();
     response.writeHead(200, {'Content-Type': 'text/html'});
     response.write(myDishes);
-    // response.end();
-
 }
-
-// function loadOrders(){
-//     http.createServer((request, response) => {
-//         response.writeHead(200, {'Content-Type': 'text/html'});
-//         displayDishes(response);
-//       }).listen(port)
-// }
-
-// module.exports = {loadOrders};
 
 module.exports = {displayDishes};
