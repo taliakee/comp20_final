@@ -75,17 +75,6 @@ body {
     color: #000000;
 }
 
-
-
-@media screen and (max-width: 320px) {
-    .grid-container {
-        display: block;
-    }
-    .grid-child {
-        display: block;
-    }
-}
-
 footer {
     margin-top: 5em;
     font-family: 'Exo';
