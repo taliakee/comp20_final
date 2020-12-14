@@ -91,7 +91,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
     };
 
     app.get('/place', (req, res) => {
-        // res.sendFile(__dirname + '/place_order.html')
         res.write('<!-- Begin stream -->\n');
         fs
         .createReadStream(__dirname + '/place_order.html')

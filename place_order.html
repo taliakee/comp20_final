@@ -12,13 +12,14 @@
             this.cost = cost;
         }
 
-        menuItems = new Array(
-            new MenuItem("Chicken Chop Suey", 4.5),
-            new MenuItem("Sweet and Sour Pork", 6.25),
-            new MenuItem("Shrimp Lo Mein", 5.25),
-            new MenuItem("Moo Shi Chicken", 6.5),
-            new MenuItem("Fried Rice", 2.35)
-        );
+        var dishes
+
+        var menuItems = new Array()
+        dishes.forEach((dish, i) => {
+            menuItems.push(new MenuItem(dish.name, parseFloat(dish.cost)))
+        })
+
+        console.log(menuItems)
 
         function makeSelect(name, minRange, maxRange)
         {
@@ -77,37 +78,37 @@
         document.getElementById('phone').value = window.localStorage.getItem('phone')
         document.getElementById('email').value = window.localStorage.getItem('email')
 
-        var dishes
+
         var order = window.localStorage.getItem('order')
 
         // calculate cost of items
         var rows = document.getElementsByTagName("table")[0].rows
 
-        var ccs = document.getElementsByName('quan0')[0]
-        ccs.onchange = function() {
-            rows[1].lastChild.lastChild.value = (ccs.value * menuItems[0].cost).toFixed(2)
-            calculateTotal()
-        }
-        var ssp = document.getElementsByName('quan1')[0]
-        ssp.onchange = function() {
-            rows[2].lastChild.lastChild.value = (ssp.value * menuItems[1].cost).toFixed(2)
-            calculateTotal()
-        }
-        var slm = document.getElementsByName('quan2')[0]
-        slm.onchange = function() {
-            rows[3].lastChild.lastChild.value = (slm.value * menuItems[2].cost).toFixed(2)
-            calculateTotal()
-        }
-        var msc = document.getElementsByName('quan3')[0]
-        msc.onchange = function() {
-            rows[4].lastChild.lastChild.value = (msc.value * menuItems[3].cost).toFixed(2)
-            calculateTotal()
-        }
-        var fr = document.getElementsByName('quan4')[0]
-        fr.onchange = function() {
-            rows[5].lastChild.lastChild.value = (fr.value * menuItems[4].cost).toFixed(2)
-            calculateTotal()
-        }
+        // var ccs = document.getElementsByName('quan0')[0]
+        // ccs.onchange = function() {
+        //     rows[1].lastChild.lastChild.value = (ccs.value * menuItems[0].cost).toFixed(2)
+        //     calculateTotal()
+        // }
+        // var ssp = document.getElementsByName('quan1')[0]
+        // ssp.onchange = function() {
+        //     rows[2].lastChild.lastChild.value = (ssp.value * menuItems[1].cost).toFixed(2)
+        //     calculateTotal()
+        // }
+        // var slm = document.getElementsByName('quan2')[0]
+        // slm.onchange = function() {
+        //     rows[3].lastChild.lastChild.value = (slm.value * menuItems[2].cost).toFixed(2)
+        //     calculateTotal()
+        // }
+        // var msc = document.getElementsByName('quan3')[0]
+        // msc.onchange = function() {
+        //     rows[4].lastChild.lastChild.value = (msc.value * menuItems[3].cost).toFixed(2)
+        //     calculateTotal()
+        // }
+        // var fr = document.getElementsByName('quan4')[0]
+        // fr.onchange = function() {
+        //     rows[5].lastChild.lastChild.value = (fr.value * menuItems[4].cost).toFixed(2)
+        //     calculateTotal()
+        // }
 
         var total = 0
         function calculateTotal() {
@@ -134,33 +135,12 @@
                 return false
             }
 
-            if (delivery) {
-                if (!document.getElementsByName('street')[0].value) {
-                    alert("Please enter a street address")
-                    return false
-                }
-                if (!document.getElementsByName('city')[0].value) {
-                    alert("Please enter a city")
-                    return false
-                }
-            }
-
             // thank you, recap of order, total, and time for pickup/delivery
             document.write("<h1>Thank you for your order!</h1>")
-            var str = "<p>You got:<br>" + (ccs.value ? ccs.value + " Chicken Chop Suey<br>" : "") + (ssp.value ? ssp.value + " Sweet and Sour Pork<br>" : "") + (slm.value ? slm.value + " Shrimp Lo Mein<br>" : "") + (msc.value ? msc.value + " Moo Shi Chicken<br>" : "") + (fr.value ? fr.value + " Fried Rice<br>" : "") + "</p>"
-            document.write(str)
+            // var str = "<p>You got:<br>" + (ccs.value ? ccs.value + " Chicken Chop Suey<br>" : "") + (ssp.value ? ssp.value + " Sweet and Sour Pork<br>" : "") + (slm.value ? slm.value + " Shrimp Lo Mein<br>" : "") + (msc.value ? msc.value + " Moo Shi Chicken<br>" : "") + (fr.value ? fr.value + " Fried Rice<br>" : "") + "</p>"
+            // document.write(str)
 
             document.write("<p>Your total was: $" + total.toFixed(2) + "</p>")
-
-            var time = new Date()
-            if (delivery) {
-                time.setMinutes(time.getMinutes() + 30)
-                document.write("Delivery time: " + time)
-            }
-            else {
-                time.setMinutes(time.getMinutes() + 15)
-                document.write("Pickup time: " + time)
-            }
         }
     </script>
     </body>
