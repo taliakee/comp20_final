@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const menu = require("./menu.js");
-const port = process.env.PORT || 3000;
 
 
 app.listen(process.env.PORT || 3000, function() {
@@ -9,7 +8,7 @@ app.listen(process.env.PORT || 3000, function() {
 })
 
 app.get('/', (req, res) => {
-    res.send("This will have our index page");
+    res.sendFile(__dirname + '/index.html');
 })
 
 app.get('/hoursandlocations', (req, res) => {

@@ -1,6 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
 var http = require('http');
-// var port = process.env.PORT || 3000;
 var dburl = "mongodb+srv://tkee:varu58Ce@cluster0.egogg.mongodb.net/stock_market?retryWrites=true&w=majority";
 
 async function getDishes()
