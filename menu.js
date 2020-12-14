@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
 var http = require('http');
-var port = process.env.PORT || 3000;
+// var port = process.env.PORT || 3000;
 var dburl = "mongodb+srv://tkee:varu58Ce@cluster0.egogg.mongodb.net/stock_market?retryWrites=true&w=majority";
 
 async function getDishes()
@@ -60,17 +60,17 @@ async function displayDishes(response){
 
     var myDishes = await getDishes();
     response.write(myDishes);
-    response.writeHead(200, {'Content-Type': 'image/jpg'});
-    response.write()
     response.end();
 
 }
 
-function loadOrders(){
-    http.createServer((request, response) => {
-        response.writeHead(200, {'Content-Type': 'text/html'});
-        displayDishes(response);
-      }).listen(port)
-}
+// function loadOrders(){
+//     http.createServer((request, response) => {
+//         response.writeHead(200, {'Content-Type': 'text/html'});
+//         displayDishes(response);
+//       }).listen(port)
+// }
 
-module.exports = {loadOrders};
+// module.exports = {loadOrders};
+
+module.exports = {displayDishes};

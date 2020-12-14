@@ -17,7 +17,7 @@ app.get('/hoursandlocations', (req, res) => {
 })
 
 app.get('/menu', (req, res) => {
-    res.send(menu.loadOrders());
+    res.send(menu.displayDishes(res));
     // res.sendFile(__dirname + '/menu.html');
 })
 
