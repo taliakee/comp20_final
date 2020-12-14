@@ -121,6 +121,30 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
 
         res.write("<p>Your total was: $" + order.total + "</p>")
         res.write("</body><footer>&#169; Copyright 2020 Noods To Go</footer></html>")
+
+        var query = { fname: order.fname, lname: order.lname, phone: order.phone }
+        history.find(query).toArray(function(err, result) {
+            if (err) console.log("Query err: " + err)
+            console.log(result);
+
+            var newOrder = {}
+            dishes.forEach((dish, i) => {
+                if (order.dish[i] > 0) {
+                    newOrder[dish.name] = parseInt(order.dish[i])
+                }
+            })
+            console.log(newOrder);
+
+            if (result.length == 0) {
+                query["email"] = order.email
+                query["past_orders"] = [newOrder]
+                history.insertOne(query)
+                console.log(query);
+            }
+            else {
+                history.updateOne({ _id: result[0]._id }, { $push: { past_orders: newOrder } })
+            }
+        })
         res.end()
     })
 })
