@@ -15,6 +15,10 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 })
 
+app.get('/about_us', (req, res) => {
+    res.sendFile(__dirname + '/about_us.html');
+})
+
 app.get('/hoursandlocations', (req, res) => {
     res.sendFile(__dirname + '/hoursandlocations.html');
 })
