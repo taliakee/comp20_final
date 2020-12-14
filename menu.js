@@ -73,8 +73,4 @@ function loadOrders(){
       }).listen(port)
 }
 
-function temp(){
-    console.log("hi");
-}
-// module.exports = {loadOrders};
-module.exports = {temp};
+module.exports = {loadOrders};
