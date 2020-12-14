@@ -81,11 +81,11 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
     dishesdb.find().toArray(function(err, result) {
         if (err) console.log("Query err: " + err)
         console.log("Dishes query success")
-        dishes = JSON.stringify(result)
+        dishes = result
     })
 
     parser._transform = function(data, encoding, done) {
-      const str = data.toString().replace("var dishes", "var dishes = " + dishes + "");
+      const str = data.toString().replace("var dishes", "var dishes = " + JSON.stringify(dishes) + "");
       this.push(str);
       done();
     };
@@ -99,5 +99,28 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         .on('end', () => {
             res.write('\n<!-- End stream -->')
         }).pipe(res);
+    })
+
+    app.post('/place', (req, res) => {
+        console.log(req.body);
+        const order = req.body
+
+        var str = "<!DOCTYPE html>\n" +
+                  "<html><head><title>Order Placed</title></head>\n<body>" +
+                  "<h1>Thank you for your order!</h1>\n" +
+                  "<p>You got:<br>\n"
+
+        dishes.forEach((dish, i) => {
+            if (order.dish[i] > 0) {
+                str += order.dish[i] + " " + dish.name + "<br>\n"
+            }
+        });
+        str += "</p>"
+
+        res.write(str)
+
+        res.write("<p>Your total was: $" + order.total + "</p>")
+        res.write("</body><footer>&#169; Copyright 2020 Noods To Go</footer></html>")
+        res.end()
     })
 })

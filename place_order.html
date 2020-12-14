@@ -31,11 +31,11 @@
     </script>
 
     <h1>Place Order</h1>
-    <form>
-        <p>First Name*: <input type="text" name='fname' id='fname'></p>
-        <p>Last Name*:  <input type="text" name='lname' id='lname'></p>
-        <p>Phone Number*: <input type="text" name='phone' id='phone'></p>
-        <p>Email*: <input type="text" name='email' id='email'></p>
+    <form action="/place" method="post">
+        <p>First Name*: <input type="text" name='fname' id='fname' pattern="[A-Za-z]+" required></p>
+        <p>Last Name*:  <input type="text" name='lname' id='lname' pattern="[A-Za-z]+" required></p>
+        <p>Phone Number*: <input type="text" name='phone' id='phone' pattern="[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}" required></p>
+        <p>Email*: <input type="text" name='email' id='email' pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*" required></p>
         <table id="dishes" border="0" cellpadding="3">
             <tr>
                 <th>Select Item</th>
@@ -66,7 +66,7 @@
     <p>Total: $ <input type="text"  name='total' id="total" />
     </p>
 
-    <input type = "submit" value = "Submit Order" />
+    <button type="submit">Submit Order</button>
 
     </form>
 
@@ -103,35 +103,40 @@
             total = (subtotal * 1.0625)
         }
 
+        // message for invalid first name
+        var input = document.getElementById('fname')
+        input.oninvalid = function(event) {
+            event.target.setCustomValidity("Please enter a valid first name")
+        }
+        // message for invalid last name
+        var input = document.getElementById('lname')
+        input.oninvalid = function(event) {
+            event.target.setCustomValidity("Please enter a valid last name")
+        }
+        // message for invalid phone number
+        var input = document.getElementById('phone')
+        input.oninvalid = function(event) {
+            event.target.setCustomValidity("Please enter a valid phone number")
+        }
+        // message for invalid email
+        var input = document.getElementById('email')
+        input.oninvalid = function(event) {
+            event.target.setCustomValidity("Please enter a valid email")
+        }
 
-        var submitButton = document.querySelector("input[type='submit']")
+        var submitButton = document.querySelector("submit[type='submit']")
         submitButton.onclick = function() {
-            if (!document.getElementsByName("lname")[0].value) {
-                alert("Please enter a last name")
-                return false
-            }
-            if (!document.getElementsByName("phone")[0].value.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
-                alert("Please enter a valid phone number")
-                return false
-            }
-            if (!document.getElementsByName("email")[0].value.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/im)) {
-                alert("Please enter a valid email address");
-                return false
-            }
-
             // thank you, recap of order, total
-
-            var str = "<p>You got:<br>"
+            var str = "<h1>Thank you for your order!</h1>" +
+                      "<p>You got:<br>"
 
             dropdowns.forEach((item, i) => {
                 if (item.value > 0) {
                     str += item.value + " " + menuItems[i].name + "<br>"
                 }
             });
-
-
             str += "</p>"
-            document.write("<h1>Thank you for your order!</h1>")
+
             document.write(str)
 
             document.write("<p>Your total was: $" + total.toFixed(2) + "</p>")
