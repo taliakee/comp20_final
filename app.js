@@ -12,6 +12,6 @@ app.get('/', (req, res) => {
 })
 
 app.get('/hoursandlocations', (req, res) => {
-    res.sendFile(__dirname, '/hoursandlocations.html');
+    res.sendFile(__dirname + '/hoursandlocations.html');
 })
 
