@@ -38,7 +38,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
 
         history.find(query).toArray(function(err, result) {
             if (err) console.log("Query err: " + err)
-            console.log("Result: " + JSON.stringify(result))
+            console.log("Order query success")
 
             var html = "<!DOCTYPE html>\n" +
                        "<html><head><title>Query Results</title></head>\n<body>"
@@ -80,7 +80,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
 
     dishesdb.find().toArray(function(err, result) {
         if (err) console.log("Query err: " + err)
-        console.log("Result: " + JSON.stringify(result))
+        console.log("Dishes query success")
         dishes = JSON.stringify(result)
     })
 
