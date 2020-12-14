@@ -8,10 +8,10 @@ app.listen(process.env.PORT || 3000, function() {
 })
 
 
-app.use(express.static('/public'));
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + 'public/index.html');
+    res.sendFile(__dirname + '/public/index.html');
 })
 
 app.get('/hoursandlocations', (req, res) => {
