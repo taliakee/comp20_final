@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Place Order</title>
+    </head>
+    <body>
+        <script language="javascript">
+        function MenuItem(name, cost)
+        {
+            this.name = name;
+            this.cost = cost;
+        }
+
+        menuItems = new Array(
+            new MenuItem("Chicken Chop Suey", 4.5),
+            new MenuItem("Sweet and Sour Pork", 6.25),
+            new MenuItem("Shrimp Lo Mein", 5.25),
+            new MenuItem("Moo Shi Chicken", 6.5),
+            new MenuItem("Fried Rice", 2.35)
+        );
+
+        function makeSelect(name, minRange, maxRange)
+        {
+            var t= "";
+            t = "<select name='" + name + "' size='1'>";
+            for (j=minRange; j<=maxRange; j++)
+            t += "<option>" + j + "</option>";
+            t+= "</select>";
+            return t;
+        }
+    </script>
+
+    <h1>Place Order</h1>
+    <form>
+        <p>First Name*: <input type="text"  name='fname' /></p>
+        <p>Last Name*:  <input type="text"  name='lname' /></p>
+        <p>Phone Number*: <input type="text"  name='phone' /></p>
+        <p>Email*: <input type="text"  name='email' /></p>
+        <table border="0" cellpadding="3">
+            <tr>
+                <th>Select Item</th>
+                <th>Item Name</th>
+                <th>Cost Each</th>
+                <th>Total Cost</th>
+            </tr>
+            <script language="javascript">
+
+            var s = "";
+            for (i=0; i< menuItems.length; i++)
+            {
+                s += "<tr><td>";
+                s += makeSelect("quan" + i, 0, 10);
+                s += "</td><td>" + menuItems[i].name + "</td>";
+                s += "<td> $ " + menuItems[i].cost.toFixed(2) + "</td>";
+                s += "<td>$ 0.00</td></tr>";
+            }
+            document.writeln(s);
+        </script>
+    </table>
+    <p>Subtotal:
+        $<input type="text"  name='subtotal' id="subtotal" />
+    </p>
+    <p>Mass tax 6.25%:
+        $ <input type="text"  name='tax' id="tax" />
+    </p>
+    <p>Total: $ <input type="text"  name='total' id="total" />
+    </p>
+
+    <input type = "submit" value = "Submit Order" />
+
+    </form>
+
+    <script type="text/javascript">
+        console.log(localStorage.getItem('fname'))
+
+        // calculate cost of items
+        var rows = document.getElementsByTagName("table")[0].rows
+
+        var ccs = document.getElementsByName('quan0')[0]
+        ccs.onchange = function() {
+            rows[1].lastChild.lastChild.value = (ccs.value * menuItems[0].cost).toFixed(2)
+            calculateTotal()
+        }
+        var ssp = document.getElementsByName('quan1')[0]
+        ssp.onchange = function() {
+            rows[2].lastChild.lastChild.value = (ssp.value * menuItems[1].cost).toFixed(2)
+            calculateTotal()
+        }
+        var slm = document.getElementsByName('quan2')[0]
+        slm.onchange = function() {
+            rows[3].lastChild.lastChild.value = (slm.value * menuItems[2].cost).toFixed(2)
+            calculateTotal()
+        }
+        var msc = document.getElementsByName('quan3')[0]
+        msc.onchange = function() {
+            rows[4].lastChild.lastChild.value = (msc.value * menuItems[3].cost).toFixed(2)
+            calculateTotal()
+        }
+        var fr = document.getElementsByName('quan4')[0]
+        fr.onchange = function() {
+            rows[5].lastChild.lastChild.value = (fr.value * menuItems[4].cost).toFixed(2)
+            calculateTotal()
+        }
+
+        var total = 0
+        function calculateTotal() {
+            var subtotal = 0
+            for (var i = 1; i < rows.length; i++) {
+                var price = parseFloat(rows[i].lastChild.lastChild.value)
+                subtotal += price ? price : 0
+            }
+            document.getElementById('subtotal').value = subtotal.toFixed(2)
+            document.getElementById('tax').value = (subtotal * .0625).toFixed(2)
+            document.getElementById('total').value = (subtotal * 1.0625).toFixed(2)
+            total = (subtotal * 1.0625)
+        }
+
+
+        var submitButton = document.querySelector("input[type='submit']")
+        submitButton.onclick = function() {
+            if (!document.getElementsByName("lname")[0].value) {
+                alert("Please enter a last name")
+                return false
+            }
+            if (!document.getElementsByName("phone")[0].value.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
+                alert("Please enter a valid phone number")
+                return false
+            }
+
+            if (delivery) {
+                if (!document.getElementsByName('street')[0].value) {
+                    alert("Please enter a street address")
+                    return false
+                }
+                if (!document.getElementsByName('city')[0].value) {
+                    alert("Please enter a city")
+                    return false
+                }
+            }
+
+            // thank you, recap of order, total, and time for pickup/delivery
+            document.write("<h1>Thank you for your order!</h1>")
+            var str = "<p>You got:<br>" + (ccs.value ? ccs.value + " Chicken Chop Suey<br>" : "") + (ssp.value ? ssp.value + " Sweet and Sour Pork<br>" : "") + (slm.value ? slm.value + " Shrimp Lo Mein<br>" : "") + (msc.value ? msc.value + " Moo Shi Chicken<br>" : "") + (fr.value ? fr.value + " Fried Rice<br>" : "") + "</p>"
+            document.write(str)
+
+            document.write("<p>Your total was: $" + total.toFixed(2) + "</p>")
+
+            var time = new Date()
+            if (delivery) {
+                time.setMinutes(time.getMinutes() + 30)
+                document.write("Delivery time: " + time)
+            }
+            else {
+                time.setMinutes(time.getMinutes() + 15)
+                document.write("Pickup time: " + time)
+            }
+        }
+    </script>
+    </body>
+</html>
