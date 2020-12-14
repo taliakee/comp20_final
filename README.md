@@ -20,3 +20,14 @@ Menu backend = Talia
 Menu frontend = Endo  
 Order backend = Liana  
 Order frontend = Ann Marie  
+
+# style/color things
+Light blue: #72acb9
+Dark blue: #086788
+Off white: #f2f4f3
+
+from logo:
+Yellow: #f0c808
+Red: #dd1c1a
+
+fonts: Open Sans, Exo
