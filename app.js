@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const menu = require("./menu.js");
 const port = process.env.PORT || 3000;
 
 
@@ -15,3 +16,10 @@ app.get('/hoursandlocations', (req, res) => {
     res.sendFile(__dirname + '/hoursandlocations.html');
 })
 
+app.get('/menu', (req, res) => {
+    res.send(menu.loadOrders());
+})
+
+app.get('/order', (req, res) => {
+    res.sendFile(__dirname + '/order.html');
+})
