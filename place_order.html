@@ -77,6 +77,8 @@
         document.getElementById('phone').value = window.localStorage.getItem('phone')
         document.getElementById('email').value = window.localStorage.getItem('email')
 
+        var dishes
+        var order = window.localStorage.getItem('order')
 
         // calculate cost of items
         var rows = document.getElementsByTagName("table")[0].rows

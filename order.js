@@ -1,6 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
+const fs = require('fs');
+const Transform = require('stream').Transform;
+const parser = new Transform();
+const newLineStream = require('new-line');
 
 const app = express()
 
@@ -9,7 +13,7 @@ app.listen(process.env.PORT || 3000, function() {
 })
 app.use(bodyParser.urlencoded({ extended: true }))
 
-var url = "mongodb+srv://tkee:varu58Ce@cluster0.egogg.mongodb.net/noodles?retryWrites=true&w=majority"
+const url = "mongodb+srv://tkee:varu58Ce@cluster0.egogg.mongodb.net/noodles?retryWrites=true&w=majority"
 
 MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
     if (err) {
@@ -31,8 +35,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         query.phone = query.phone.replace(/\D/g,'')
 
         console.log("Query: " + query)
-
-        var customer = {}
 
         history.find(query).toArray(function(err, result) {
             if (err) console.log("Query err: " + err)
@@ -68,12 +70,35 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                     "&#169; Copyright 2020 Noods To Go"
                     "</footer></html>"
             res.write(html)
-            res.end()
-            // console.log(html)
         })
+        res.end()
     })
 
+    const dishesdb = db.collection("dishes")
+
+    var dishes
+
+    dishesdb.find().toArray(function(err, result) {
+        if (err) console.log("Query err: " + err)
+        console.log("Result: " + JSON.stringify(result))
+        dishes = JSON.stringify(result)
+    })
+
+    parser._transform = function(data, encoding, done) {
+      const str = data.toString().replace("var dishes", "var dishes = " + dishes + "");
+      this.push(str);
+      done();
+    };
+
     app.get('/place', (req, res) => {
-        res.sendFile(__dirname + '/place_order.html')
+        // res.sendFile(__dirname + '/place_order.html')
+        res.write('<!-- Begin stream -->\n');
+        fs
+        .createReadStream(__dirname + '/place_order.html')
+        .pipe(newLineStream())
+        .pipe(parser)
+        .on('end', () => {
+            res.write('\n<!-- End stream -->')
+        }).pipe(res);
     })
 })
