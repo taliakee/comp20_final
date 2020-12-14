@@ -1,26 +1,36 @@
 {
-  "name": "app",
+  "name": "comp20_final",
   "version": "1.0.0",
-  "description": "app ",
-  "engines": {
-    "node": "12.x"
-  },
-  "main": "app.js",
+  "description": "General pages:   • Home -- include QR code api to bring us to Menu page   • About   • Hours & Location -- Maybe use Google maps API to find nearest shop   • Menu -- use database with table of noodle dishes   • Order        - Form → Ask user for first and last name to look up past orders AND  give option to continue without looking up past order        - Use database with table of past customers and their orders --> Display 3 most recent orders along with form2 if user elected        - Form2 → first name, last name, email, phone number                → List all dishes and provide select bar to specify quantity        - Once form2 submitted, add that data into database and display an order confirmation/summary page   • Reviews",
+  "main": "order.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js",
     "start": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/taliakee/comp20_final.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "",
+  "bugs": {
+    "url": "https://github.com/taliakee/comp20_final/issues"
+  },
+  "homepage": "https://github.com/taliakee/comp20_final#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "mongodb": "^3.6.3"
+    "fs": "0.0.1-security",
+    "mongodb": "^3.6.3",
+    "new-line": "^1.1.1",
+    "stream": "0.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
+  },
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x"
   }
 }
