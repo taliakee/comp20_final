@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hours & Locations - Noods To Go</title>
+        <!-- <link rel="stylesheet" href="about_us.css"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset = "UTF-8" />
+
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <script
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAT9RR3dP9Uuuxmffyx-OyO_X4wl6HIeg8&callback=initMap&libraries=&v=weekly"
+          defer
+        ></script>
+
+        <style type="text/css">
+            body {
+                background-color: #FAF3F6;
+            }
+
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .column {
+                flex: 50%;
+                padding: 5px;
+            }
+
+            /* Clear floats after the columns */
+
+            .row {
+                display: flex;
+            }
+
+            /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+            #googlemap {
+                width: 80%;
+                height: 450px;
+            }
+        
+            footer {
+                padding: 15px;
+            }
+        </style>
+
+        <script>
+            let map;
+
+            function initMap() {
+                map = new google.maps.Map(document.getElementById("googlemap"), {
+                  center: { lat: -34.397, lng: 150.644 },
+                  zoom: 8,
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <h1 class="title">Noods To Go</h1>
+        
+        <section id="Hours">
+            <h2 id="Hours">Hours</h2>
+            <ul>
+                <li>Sunday - Thursday: 9 a.m. to 10 p.m.</li>
+                <li>Friday - Saturday: 10 a.m. to 1 a.m.</li>
+            </ul>
+        </section>
+
+        
+        <section id="Locations">
+            <h2 id="Locations">Locations</h2>
+            <div class="row">
+                <div class="column">
+                    <h3>United States</h3>
+                        <h4>Arizona</h4>
+                        <ul>
+                            <li>Grand Canyon</li>
+                        </ul>
+
+                        <h4>Massachusetts</h4>
+                        <ul>
+                            <li>Halligan Hall, Tufts University</li>
+                        </ul>
+
+                        <h4>New York</h4>
+                        <ul>
+                            <li>Empire State Building</li>
+                        </ul>
+
+                        <h4>South Dakota</h4>
+                        <ul>
+                            <li>Mount Rushmore</li>
+                        </ul>
+
+                        <h4>Washington</h4>
+                        <ul>
+                            <li>Space Needle</li>
+                        </ul>
+                </div>
+
+                <div class="column">
+                    <h3>Europe</h3>
+                        <h4>France</h4>
+                        <ul>
+                            <li>Eiffel Tower</li>
+                        </ul>
+
+                    <h3>United Kingdom</h3>
+                        <h4>England</h4>
+                        <ul>
+                            <li>London Eye</li>
+                        </ul>
+
+                    <h3>Australia</h3>
+                        <h4>New South Wales</h4>
+                        <ul>
+                            <li>Sydney Opera House</li>
+                        </ul>
+
+                        <h4>Queensland</h4>
+                        <ul>
+                            <li>Great Barrier Reef</li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+
+        <div align="center">
+            <div id="googlemap"></div>
+        </div>
+
+        <footer>
+           &#169; Copyright 2020 Noods To Go
+        </footer>
+    </body>
+</html>
+
+<!-- GOOGLE MAPS API INFORMATION -->
+<!--
+  -- Google Maps API Key: AIzaSyAT9RR3dP9Uuuxmffyx-OyO_X4wl6HIeg8
+  -- https://developers.google.com/maps/documentation/javascript/overview#all
+  -->
