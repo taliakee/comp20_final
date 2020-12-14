@@ -68,7 +68,7 @@
 
         <button type="submit">Submit Order</button>
 
-        </form><br>r
+        </form><br>
 
         <script type="text/javascript">
             document.getElementById('fname').value = window.localStorage.getItem('fname')
@@ -76,12 +76,10 @@
             document.getElementById('phone').value = window.localStorage.getItem('phone')
             document.getElementById('email').value = window.localStorage.getItem('email')
 
-            var order = window.localStorage.getItem('order')
-
-            // calculate cost of items
             var rows = document.getElementById("dishes").rows
             var dropdowns = document.getElementsByName("dish")
 
+            // dropdown onchange listeners
             dropdowns.forEach((dropdown, i) => {
                 dropdown.onchange = function() {
                     rows[i + 1].lastChild.innerHTML = "$ " + (dropdown.value * menuItems[i].cost).toFixed(2)
@@ -89,6 +87,19 @@
                 }
             });
 
+            // populate order from history if applicable
+            var order = JSON.parse(window.localStorage.getItem('order'))
+            console.log(order);
+
+            menuItems.forEach((item, i) => {
+                for (const [dish, quantity] of Object.entries(order)) {
+                    if (item.name == dish) {
+                        dropdowns[i].value = quantity
+                    }
+                }
+            })
+
+            // calculate cost of items
             var total = 0
             function calculateTotal() {
                 var subtotal = 0

@@ -50,7 +50,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                 const past_orders = result[0].past_orders
                 console.log(past_orders)
                 past_orders.forEach((order, i) => {
-                    html += "<div>Order #" + i + ":<br>Dishes ordered: <div style='margin-left:20px'>\n"
+                    html += "<div>Order #" + i + ":<br><div style='margin-left:20px'>\n"
                     for (const [key, value] of Object.entries(order)) {
                         console.log(key, value)
                         html += value + " " + key + "<br>"
@@ -69,9 +69,11 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                     "}</script>\n<footer>" +
                     "&#169; Copyright 2020 Noods To Go"
                     "</footer></html>"
-            res.write(html)
+            res.write(html, function(err) {
+                if (err) console.log("Write err: " + err)
+                res.end()
+            })
         })
-        res.end()
     })
 
     const dishesdb = db.collection("dishes")
@@ -120,7 +122,9 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         res.write(str)
 
         res.write("<p>Your total was: $" + order.total + "</p>")
-        res.write("</body><footer>&#169; Copyright 2020 Noods To Go</footer></html>")
+        res.write("</body><footer>&#169; Copyright 2020 Noods To Go</footer></html>", function(err) {
+            res.end()
+        })
 
         var query = { fname: order.fname, lname: order.lname, phone: order.phone }
         history.find(query).toArray(function(err, result) {
@@ -145,6 +149,5 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                 history.updateOne({ _id: result[0]._id }, { $push: { past_orders: newOrder } })
             }
         })
-        res.end()
     })
 })
