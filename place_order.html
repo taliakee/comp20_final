@@ -33,10 +33,10 @@
 
     <h1>Place Order</h1>
     <form>
-        <p>First Name*: <input type="text"  name='fname' /></p>
-        <p>Last Name*:  <input type="text"  name='lname' /></p>
-        <p>Phone Number*: <input type="text"  name='phone' /></p>
-        <p>Email*: <input type="text"  name='email' /></p>
+        <p>First Name*: <input type="text" name='fname' id='fname'></p>
+        <p>Last Name*:  <input type="text" name='lname' id='lname'></p>
+        <p>Phone Number*: <input type="text" name='phone' id='phone'></p>
+        <p>Email*: <input type="text" name='email' id='email'></p>
         <table border="0" cellpadding="3">
             <tr>
                 <th>Select Item</th>
@@ -72,7 +72,11 @@
     </form>
 
     <script type="text/javascript">
-        console.log(localStorage.getItem('fname'))
+        document.getElementById('fname').value = window.localStorage.getItem('fname')
+        document.getElementById('lname').value = window.localStorage.getItem('lname')
+        document.getElementById('phone').value = window.localStorage.getItem('phone')
+        document.getElementById('email').value = window.localStorage.getItem('email')
+
 
         // calculate cost of items
         var rows = document.getElementsByTagName("table")[0].rows

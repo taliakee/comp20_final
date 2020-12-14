@@ -36,7 +36,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
 
         history.find(query).toArray(function(err, result) {
             if (err) console.log("Query err: " + err)
-            console.log("Result: " + result)
+            console.log("Result: " + JSON.stringify(result))
 
             var html = "<!DOCTYPE html>\n" +
                        "<html><head><title>Query Results</title></head>\n<body>"
@@ -58,6 +58,11 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             }
             html += "</body>\n<script>function order(i, order) {" +
                     "console.log(i + order)\n" +
+                    "window.localStorage.setItem('fname', '" + query.fname + "')\n" +
+                    "window.localStorage.setItem('lname', '" + query.lname + "')\n" +
+                    "window.localStorage.setItem('phone', '" + query.phone + "')\n" +
+                    "window.localStorage.setItem('email', '" + result[0].email + "')\n" +
+                    "window.localStorage.setItem('order', JSON.stringify(order))\n" +
                     "window.location.href = '/place'" +
                     "}</script>\n<footer>" +
                     "&#169; Copyright 2020 Noods To Go"
@@ -69,7 +74,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
     })
 
     app.get('/place', (req, res) => {
-        console.log(req.body);
         res.sendFile(__dirname + '/place_order.html')
     })
 })
