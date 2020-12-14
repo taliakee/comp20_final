@@ -72,6 +72,4 @@ function loadOrders(){
         displayDishes(response);
       }).listen(port)
 }
-module.exports = {
-    loadOrders: loadOrders
-};
+module.exports = {loadOrders};
