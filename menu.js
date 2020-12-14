@@ -60,7 +60,7 @@ async function displayDishes(response){
 
     var myDishes = await getDishes();
     response.write(myDishes);
-    response.end();
+    // response.end();
 
 }
 
