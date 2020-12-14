@@ -59,6 +59,7 @@ async function getDishes()
 async function displayDishes(response){
 
     var myDishes = await getDishes();
+    response.writeHead(200, {'Content-Type': 'text/html'});
     response.write(myDishes);
     // response.end();
 
