@@ -125,9 +125,13 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         .createReadStream(__dirname + '/place_order.html')
         .pipe(newLineStream())
         .pipe(parser)
-        .on('complete', () => {
+        .on('end', () => {
             res.write('\n<!-- End stream -->')
+            console.log("end");
         }).pipe(res)
+        .on('end', () => {
+            res.end()
+        })
     })
 
     app.post('/place', (req, res) => {

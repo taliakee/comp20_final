@@ -76,6 +76,27 @@
             document.getElementById('phone').value = window.localStorage.getItem('phone')
             document.getElementById('email').value = window.localStorage.getItem('email')
 
+            // message for invalid first name
+            var input = document.getElementById('fname')
+            input.oninvalid = function(event) {
+                event.target.setCustomValidity("Please enter a valid first name")
+            }
+            // message for invalid last name
+            var input = document.getElementById('lname')
+            input.oninvalid = function(event) {
+                event.target.setCustomValidity("Please enter a valid last name")
+            }
+            // message for invalid phone number
+            var input = document.getElementById('phone')
+            input.oninvalid = function(event) {
+                event.target.setCustomValidity("Please enter a valid phone number")
+            }
+            // message for invalid email
+            var input = document.getElementById('email')
+            input.oninvalid = function(event) {
+                event.target.setCustomValidity("Please enter a valid email")
+            }
+
             var rows = document.getElementById("dishes").rows
             var dropdowns = document.getElementsByName("dish")
 
@@ -112,27 +133,6 @@
                 document.getElementById('tax').value = (subtotal * .0625).toFixed(2)
                 document.getElementById('total').value = (subtotal * 1.0625).toFixed(2)
                 total = (subtotal * 1.0625)
-            }
-
-            // message for invalid first name
-            var input = document.getElementById('fname')
-            input.oninvalid = function(event) {
-                event.target.setCustomValidity("Please enter a valid first name")
-            }
-            // message for invalid last name
-            var input = document.getElementById('lname')
-            input.oninvalid = function(event) {
-                event.target.setCustomValidity("Please enter a valid last name")
-            }
-            // message for invalid phone number
-            var input = document.getElementById('phone')
-            input.oninvalid = function(event) {
-                event.target.setCustomValidity("Please enter a valid phone number")
-            }
-            // message for invalid email
-            var input = document.getElementById('email')
-            input.oninvalid = function(event) {
-                event.target.setCustomValidity("Please enter a valid email")
             }
         </script>
     </body>
