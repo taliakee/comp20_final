@@ -13,7 +13,6 @@ app.listen(process.env.PORT || 3000, function() {
     console.log('server is running')
 })
 
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
@@ -117,15 +116,12 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
     app.get('/place', async (req, res) => {
         dishes = await getDishes()
 
-        fs.readFile(__dirname + '/place_order.html', 'utf8', (err,html) => {
-            if(err){
+        fs.readFile(__dirname + '/place_order.html', 'utf8', (err, html) => {
+            if (err) {
               throw err;
             }
 
-            console.log(JSON.stringify(dishes));
-
             res.write(html.toString().replace("var dishes", "var dishes = " + JSON.stringify(dishes) + ""), function(err) {
-                console.log("end");
                 res.end()
             })
         })
