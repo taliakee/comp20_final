@@ -48,13 +48,44 @@
         </style>
 
         <script>
+            var markers =
+            [
+                [ "Grand Canyon National Park", 36.49379969396841, -112.14262302303716],
+                [ "Halligan Hall", 42.40829867928329, -71.11625667739258 ],
+                [ "Empire State Building", 40.74865993445658, -73.98563221572238],
+                [ "Sydney Opera House", -33.85660618893988, 151.21530742664882 ],
+            ]
+
+            var marker;
+            var len = markers.length;
+            var i = 0;
+
             let map;
 
+            // Initialize and add the map
             function initMap() {
-                map = new google.maps.Map(document.getElementById("googlemap"), {
-                  center: { lat: -34.397, lng: 150.644 },
-                  zoom: 8,
+                // The location of Sydney Opera House
+                const SydneyOperaHouse = { lat: -33.85660618893988, lng: 151.21530742664882 };
+
+                // The map, centered at Sydney Opera House
+                const map = new google.maps.Map(document.getElementById("googlemap"), {
+                    zoom: 2,
+                    center: { lat: 34.049, lng: -18.598 },
                 });
+            
+                for (i = 0; i < len; i++) {
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(markers[i][1], markers[i][2]),
+                        map: map,
+                        title: markers[i][0],
+                    })
+                }
+                // marker positioned at Sydney Opera House
+                // const marker = new google.maps.Marker({
+                //     position: SydneyOperaHouse,
+                //     map: map,
+                //     title: "Sydney Opera House",
+                // });
             }
         </script>
     </head>
@@ -129,7 +160,8 @@
         </section>
 
         <div align="center">
-            <div id="googlemap"></div>
+            <div id="googlemap">
+            </div>
         </div>
 
         <footer>
@@ -141,5 +173,5 @@
 <!-- GOOGLE MAPS API INFORMATION -->
 <!--
   -- Google Maps API Key: AIzaSyAT9RR3dP9Uuuxmffyx-OyO_X4wl6HIeg8
-  -- https://developers.google.com/maps/documentation/javascript/overview#all
+  -- https://developers.google.com/maps/documentation/javascript/overview
   -->
