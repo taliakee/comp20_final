@@ -64,7 +64,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                         console.log(key, value)
                         html += value + " " + key + "<br>"
                     }
-                    html += "<button type='button' onclick='order(" + i + ", " + JSON.stringify(order) + ")'>Reorder</button></p></div></div>\n"
+                    html += "<button type='button' onclick='order(" + i + ", " + JSON.stringify(order) + ")'>Reorder</button></div></div>\n"
                 })
             }
             html += "</body>\n<script>function order(i, order) {" +
