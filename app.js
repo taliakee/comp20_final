@@ -2,9 +2,6 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
 const fs = require('fs')
-const Transform = require('stream').Transform
-const parser = new Transform()
-const newLineStream = require('new-line')
 
 const app = express();
 const menu = require("./menu.js");
@@ -104,33 +101,33 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
 
     const dishesdb = db.collection("dishes")
 
-    var dishes
+    var dishes = getDishes()
 
-    await dishesdb.find().toArray(function(err, result) {
-        if (err) console.log("Query err: " + err)
-        console.log("Dishes query success")
-        dishes = result
-    })
+    async function getDishes() {
+        return new Promise(function(resolve, reject) {
+            dishesdb.find().toArray(function(err, result) {
+                if (err) console.log("Query err: " + err)
+                console.log("Dishes query success")
 
-    parser._transform = function(data, encoding, done) {
-      const str = data.toString().replace("var dishes", "var dishes = " + JSON.stringify(dishes) + "")
-      this.push(str)
-      done()
+                resolve(result)
+            })
+        })
     }
 
-    app.get('/place', (req, res) => {
-        console.log("start");
-        res.write('<!-- Begin stream -->\n')
-        fs
-        .createReadStream(__dirname + '/place_order.html')
-        .pipe(newLineStream())
-        .pipe(parser)
-        .on('end', () => {
-            res.write('\n<!-- End stream -->')
-            console.log("end");
-        }).pipe(res)
-        .on('end', () => {
-            res.end()
+    app.get('/place', async (req, res) => {
+        dishes = await getDishes()
+
+        fs.readFile(__dirname + '/place_order.html', 'utf8', (err,html) => {
+            if(err){
+              throw err;
+            }
+
+            console.log(JSON.stringify(dishes));
+
+            res.write(html.toString().replace("var dishes", "var dishes = " + JSON.stringify(dishes) + ""), function(err) {
+                console.log("end");
+                res.end()
+            })
         })
     })
 
