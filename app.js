@@ -106,7 +106,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
 
     var dishes
 
-    dishesdb.find().toArray(function(err, result) {
+    await dishesdb.find().toArray(function(err, result) {
         if (err) console.log("Query err: " + err)
         console.log("Dishes query success")
         dishes = result
