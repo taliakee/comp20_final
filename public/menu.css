@@ -51,9 +51,10 @@ body {
     margin-left: 1em;
     margin-right: 1em;
     margin-top: 1em;
-    padding: 8em;
+    padding-left: 20em;
+    padding-right: 20em;
     font-family: 'Open sans';
-    color: #ff0000;
+    color: #ffffff;
     font-size: 1em;
 }
 
