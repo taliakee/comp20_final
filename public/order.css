@@ -59,8 +59,9 @@ body {
 }
 
 .second-div h1 {
+    text-align: center;
     margin: 0;
-    padding-bottom: 0;
+    padding-bottom: .5em;
     font-size: 2em;
     font-family: 'Open sans';
     font-weight: normal;
