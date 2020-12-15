@@ -40,7 +40,8 @@ async function getDishes()
                 output += " <br/> ";
             }
             c++;
-            output += "<img src='" + dishPics[item.name] + "'><br/>" + "<p>Dish " + item.name + " - $" + item.cost + "<br/>" + item.description + "<br/>Allergens: ";
+            output += "<img src='" + dishPics[item.name] + "'><br/>" + "<p>Dish " + item.name + " - $" + item.cost + 
+                      "</p><p class=description>" + item.description + "</p><p>Allergens: ";
             var aCount = 1;
             var arrLen = item.allergens.length;
             item.allergens.forEach(function(a){
