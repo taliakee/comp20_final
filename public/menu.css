@@ -51,6 +51,7 @@ body {
     margin-left: 1em;
     margin-right: 1em;
     margin-top: 1em;
+    padding: 1em;
 }
 
 .second-div img {
@@ -61,7 +62,8 @@ body {
     font-family: 'Open sans';
     color: #000000;
     font-size: 1em;
-    max-width: 400px;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 footer {
