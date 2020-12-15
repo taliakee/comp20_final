@@ -26,10 +26,10 @@ async function getDishes()
         // add stylesheet and navbar
         output += "<link rel ='stylesheet' type ='text/css' href='menu.css'>";
         output += "<nav><div class='topnav'><a href='index.html' class='logo'><img src='noods_logo.png'></a><ul>" +
-                "<li><a class='active' href='https://comp20-noods-to-go.herokuapp.com/'>Home</a></li>" +
+                "<li><a href='https://comp20-noods-to-go.herokuapp.com/'>Home</a></li>" +
                 "<li><a href='https://comp20-noods-to-go.herokuapp.com/about_us'>About Us</a></li>" +
                 "<li><a href='https://comp20-noods-to-go.herokuapp.com/hoursandlocations'>Hours & Location</a></li>" +
-                "<li><a href='https://comp20-noods-to-go.herokuapp.com/menu'>Menu</a></li>" +
+                "<li><a class='active' href='https://comp20-noods-to-go.herokuapp.com/menu'>Menu</a></li>" +
                 "<li><a href='https://comp20-noods-to-go.herokuapp.com/order'>Order</a></li>" +
                 "<li><a href='https://comp20-noods-to-go.herokuapp.com/reviews'>Reviews</a></li>" +
                 "</ul></div></nav>";
@@ -40,7 +40,8 @@ async function getDishes()
                 output += " <br/> ";
             }
             c++;
-            output += "<img src='" + dishPics[item.name] + "'><br/>" + "Dish " + item.name + " - $" + item.cost + "<br/>" + item.description + "<br/>Allergens: ";
+            output += "<img src='" + dishPics[item.name] + "'><br/>" + "<p>Dish " + item.name + " - $" + item.cost + 
+                      "</p><p class=description>" + item.description + "</p><p>Allergens: ";
             var aCount = 1;
             var arrLen = item.allergens.length;
             item.allergens.forEach(function(a){
@@ -52,7 +53,7 @@ async function getDishes()
                 }
                 aCount += 1;
             })
-            output += '<br/><br/>';
+            output += '</p><br/><br/>';
         });
     }
     catch(err) {
