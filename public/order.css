@@ -88,6 +88,24 @@ form {
     margin-bottom: 1em;
 }
 
+button {
+    background-color: #f0c808;
+    border: none;
+    color: #000000;
+    font-family: 'Exo';
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin-top: .5em;
+}
+
+button:hover {
+    background-color: #086788;
+    color: #FAF3F6;
+}
+
 footer {
     margin-top: 5em;
     font-family: 'Exo';
