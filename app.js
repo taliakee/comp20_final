@@ -61,7 +61,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             console.log("Order query success")
 
             var html = "<!DOCTYPE html>\n" +
-                       "<html><head><title>Query Results</title></head>\n<body>" + 
+                       "<html><head><title>Query Results</title>" + 
                        "<link rel ='stylesheet' type ='text/css' href='order.css'></head>\n<body>" +
                        "<nav><div class='topnav'><a href='index.html' class='logo'><img src='noods_logo.png'></a><ul>" +
                        "<li><a href='https://comp20-noods-to-go.herokuapp.com/'>Home</a></li>" +
@@ -141,7 +141,16 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         const order = req.body
 
         var str = "<!DOCTYPE html>\n" +
-                  "<html><head><title>Order Placed</title></head>\n<body>" +
+                  "<html><head><title>Order Placed</title>" + 
+                  "<link rel ='stylesheet' type ='text/css' href='order.css'></head>\n<body>" +
+                  "<nav><div class='topnav'><a href='index.html' class='logo'><img src='noods_logo.png'></a><ul>" +
+                  "<li><a href='https://comp20-noods-to-go.herokuapp.com/'>Home</a></li>" +
+                  "<li><a href='https://comp20-noods-to-go.herokuapp.com/about_us'>About Us</a></li>" +
+                  "<li><a href='https://comp20-noods-to-go.herokuapp.com/hoursandlocations'>Hours & Location</a></li>" +
+                  "<li><a href='https://comp20-noods-to-go.herokuapp.com/menu'>Menu</a></li>" +
+                  "<li><a class='active' href='https://comp20-noods-to-go.herokuapp.com/order'>Order</a></li>" +
+                  "<li><a href='https://comp20-noods-to-go.herokuapp.com/reviews'>Reviews</a></li>" +
+                  "</ul></div></nav><div class='second-div'>"
                   "<h1>Thank you for your order!</h1>\n" +
                   "<p>You got:<br>\n"
 
@@ -155,7 +164,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         res.write(str)
 
         res.write("<p>Your total was: $" + order.total + "</p>")
-        res.write("</body><footer>&#169; Copyright 2020 Noods To Go</footer></html>", function(err) {
+        res.write("</div></body><footer>&#169; Copyright 2020 Noods To Go</footer></html>", function(err) {
             res.end()
         })
 
