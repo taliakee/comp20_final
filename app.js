@@ -61,7 +61,16 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             console.log("Order query success")
 
             var html = "<!DOCTYPE html>\n" +
-                       "<html><head><title>Query Results</title></head>\n<body>"
+                       "<html><head><title>Query Results</title>" + 
+                       "<link rel ='stylesheet' type ='text/css' href='order.css'></head>\n<body>" +
+                       "<nav><div class='topnav'><a href='https://comp20-noods-to-go.herokuapp.com/' class='logo'><img src='noods_logo.png'></a><ul>" +
+                       "<li><a href='https://comp20-noods-to-go.herokuapp.com/'>Home</a></li>" +
+                       "<li><a href='https://comp20-noods-to-go.herokuapp.com/about_us'>About Us</a></li>" +
+                       "<li><a href='https://comp20-noods-to-go.herokuapp.com/hoursandlocations'>Hours & Location</a></li>" +
+                       "<li><a href='https://comp20-noods-to-go.herokuapp.com/menu'>Menu</a></li>" +
+                       "<li><a class='active' href='https://comp20-noods-to-go.herokuapp.com/order'>Order</a></li>" +
+                       "<li><a href='https://comp20-noods-to-go.herokuapp.com/reviews'>Reviews</a></li>" +
+                       "</ul></div></nav><div class='second-div'>"
             if (result.length == 0) {
                 html += "<h1>Order Noods!</h1>\n<h2>Sorry, " + query.fname + ", our query didn't return any results! Please go back and make sure your information is correct and try again, or continue without lookup.</h2>\n"
             }
@@ -70,12 +79,12 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                 const past_orders = result[0].past_orders
                 console.log(past_orders)
                 past_orders.forEach((order, i) => {
-                    html += "<div>Order #" + i + ":<br><div style='margin-left:20px'>\n"
+                    html += "<div class='order-div'>Order #" + i + ":<br><div style='margin-left:20px'>\n"
                     for (const [key, value] of Object.entries(order)) {
                         console.log(key, value)
                         html += value + " " + key + "<br>"
                     }
-                    html += "<button type='button' onclick='order(" + i + ", " + JSON.stringify(order) + ")'>Reorder</button></p></div>\n"
+                    html += "<button type='button' onclick='order(" + i + ", " + JSON.stringify(order) + ")'>Reorder</button></div></div>\n"
                 })
             }
             html += "</body>\n<script>function order(i, order) {" +
@@ -88,7 +97,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             }
             html += "window.localStorage.setItem('order', JSON.stringify(order))\n" +
                     "window.location.href = '/place'" +
-                    "}</script>\n<footer>" +
+                    "}</script>\n</div><footer>" +
                     "&#169; Copyright 2020 Noods To Go"
                     "</footer></html>"
             res.write(html, function(err) {
@@ -132,7 +141,16 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         const order = req.body
 
         var str = "<!DOCTYPE html>\n" +
-                  "<html><head><title>Order Placed</title></head>\n<body>" +
+                  "<html><head><title>Order Placed</title>" + 
+                  "<link rel ='stylesheet' type ='text/css' href='order.css'></head>\n<body>" +
+                  "<nav><div class='topnav'><a href='https://comp20-noods-to-go.herokuapp.com/' class='logo'><img src='noods_logo.png'></a><ul>" +
+                  "<li><a href='https://comp20-noods-to-go.herokuapp.com/'>Home</a></li>" +
+                  "<li><a href='https://comp20-noods-to-go.herokuapp.com/about_us'>About Us</a></li>" +
+                  "<li><a href='https://comp20-noods-to-go.herokuapp.com/hoursandlocations'>Hours & Location</a></li>" +
+                  "<li><a href='https://comp20-noods-to-go.herokuapp.com/menu'>Menu</a></li>" +
+                  "<li><a class='active' href='https://comp20-noods-to-go.herokuapp.com/order'>Order</a></li>" +
+                  "<li><a href='https://comp20-noods-to-go.herokuapp.com/reviews'>Reviews</a></li>" +
+                  "</ul></div></nav><div class='second-div'>"
                   "<h1>Thank you for your order!</h1>\n" +
                   "<p>You got:<br>\n"
 
@@ -146,7 +164,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         res.write(str)
 
         res.write("<p>Your total was: $" + order.total + "</p>")
-        res.write("</body><footer>&#169; Copyright 2020 Noods To Go</footer></html>", function(err) {
+        res.write("</div></body><footer>&#169; Copyright 2020 Noods To Go</footer></html>", function(err) {
             res.end()
         })
 
