@@ -24,7 +24,8 @@ async function getDishes()
             console.log("No documents found");
         }
         // add stylesheet and navbar
-        output += "<link rel ='stylesheet' type ='text/css' href='menu.css'>";
+        output += "<title>Menu - Noods to Go</title>" +
+                    "<link rel ='stylesheet' type ='text/css' href='menu.css'>";
         output += "<nav><div class='topnav'><a href='https://comp20-noods-to-go.herokuapp.com/' class='logo'><img src='noods_logo.png'></a><ul>" +
                 "<li><a href='https://comp20-noods-to-go.herokuapp.com/'>Home</a></li>" +
                 "<li><a href='https://comp20-noods-to-go.herokuapp.com/about_us'>About Us</a></li>" +
