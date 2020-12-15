@@ -8,6 +8,7 @@ const newLineStream = require('new-line')
 
 const app = express();
 const menu = require("./menu.js");
+const path = require("path");
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -15,8 +16,15 @@ app.listen(process.env.PORT || 3000, function() {
     console.log('server is running')
 })
 
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
+})
+
+app.get('/about_us', (req, res) => {
+    res.sendFile(__dirname + '/about_us.html');
 })
 
 app.get('/hoursandlocations', (req, res) => {
