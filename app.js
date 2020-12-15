@@ -63,7 +63,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             var html = "<!DOCTYPE html>\n" +
                        "<html><head><title>Query Results</title>" + 
                        "<link rel ='stylesheet' type ='text/css' href='order.css'></head>\n<body>" +
-                       "<nav><div class='topnav'><a href='index.html' class='logo'><img src='noods_logo.png'></a><ul>" +
+                       "<nav><div class='topnav'><a href='https://comp20-noods-to-go.herokuapp.com/' class='logo'><img src='noods_logo.png'></a><ul>" +
                        "<li><a href='https://comp20-noods-to-go.herokuapp.com/'>Home</a></li>" +
                        "<li><a href='https://comp20-noods-to-go.herokuapp.com/about_us'>About Us</a></li>" +
                        "<li><a href='https://comp20-noods-to-go.herokuapp.com/hoursandlocations'>Hours & Location</a></li>" +
@@ -79,7 +79,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                 const past_orders = result[0].past_orders
                 console.log(past_orders)
                 past_orders.forEach((order, i) => {
-                    html += "<div>Order #" + i + ":<br><div style='margin-left:20px'>\n"
+                    html += "<div class='order-div'>Order #" + i + ":<br><div style='margin-left:20px'>\n"
                     for (const [key, value] of Object.entries(order)) {
                         console.log(key, value)
                         html += value + " " + key + "<br>"
@@ -143,7 +143,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         var str = "<!DOCTYPE html>\n" +
                   "<html><head><title>Order Placed</title>" + 
                   "<link rel ='stylesheet' type ='text/css' href='order.css'></head>\n<body>" +
-                  "<nav><div class='topnav'><a href='index.html' class='logo'><img src='noods_logo.png'></a><ul>" +
+                  "<nav><div class='topnav'><a href='https://comp20-noods-to-go.herokuapp.com/' class='logo'><img src='noods_logo.png'></a><ul>" +
                   "<li><a href='https://comp20-noods-to-go.herokuapp.com/'>Home</a></li>" +
                   "<li><a href='https://comp20-noods-to-go.herokuapp.com/about_us'>About Us</a></li>" +
                   "<li><a href='https://comp20-noods-to-go.herokuapp.com/hoursandlocations'>Hours & Location</a></li>" +

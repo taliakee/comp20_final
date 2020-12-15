@@ -88,6 +88,10 @@ form {
     margin-bottom: 1em;
 }
 
+.order-div {
+    margin-top: .5em;
+}
+
 button {
     background-color: #f0c808;
     border: none;
