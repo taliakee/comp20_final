@@ -75,9 +75,9 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                     "window.localStorage.setItem('email', '" + result[0].email + "')\n" +
                     "window.localStorage.setItem('order', JSON.stringify(order))\n" +
                     "window.location.href = '/place'" +
-                    "}</script>\n<footer>" +
+                    "}</script>\n</div><footer>" +
                     "&#169; Copyright 2020 Noods To Go"
-                    "</div></footer></html>"
+                    "</footer></html>"
             res.write(html, function(err) {
                 if (err) console.log("Write err: " + err)
                 res.end()
