@@ -70,7 +70,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                        "<li><a href='https://comp20-noods-to-go.herokuapp.com/menu'>Menu</a></li>" +
                        "<li><a class='active' href='https://comp20-noods-to-go.herokuapp.com/order'>Order</a></li>" +
                        "<li><a href='https://comp20-noods-to-go.herokuapp.com/reviews'>Reviews</a></li>" +
-                       "</ul></div></nav><div class='second-div'"
+                       "</ul></div></nav><div class='second-div'>"
             if (result.length == 0) {
                 html += "<h1>Order Noods!</h1>\n<h2>Sorry, " + query.fname + ", our query didn't return any results! Please go back and make sure your information is correct and try again, or continue without lookup.</h2>\n"
             }
@@ -97,7 +97,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             }
             html += "window.localStorage.setItem('order', JSON.stringify(order))\n" +
                     "window.location.href = '/place'" +
-                    "}</script>\n<div><footer>" +
+                    "}</script>\n</div><footer>" +
                     "&#169; Copyright 2020 Noods To Go"
                     "</footer></html>"
             res.write(html, function(err) {
