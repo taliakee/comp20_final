@@ -40,7 +40,7 @@ async function getDishes()
                 output += " <br/> ";
             }
             c++;
-            output += "<img src='" + dishPics[item.name] + "'><br/>" + "Dish " + item.name + " - $" + item.cost + "<br/>" + item.description + "<br/>Allergens: ";
+            output += "<img src='" + dishPics[item.name] + "'><br/>" + "<p>Dish " + item.name + " - $" + item.cost + "<br/>" + item.description + "<br/>Allergens: ";
             var aCount = 1;
             var arrLen = item.allergens.length;
             item.allergens.forEach(function(a){
@@ -52,7 +52,7 @@ async function getDishes()
                 }
                 aCount += 1;
             })
-            output += '<br/><br/>';
+            output += '</p><br/><br/>';
         });
     }
     catch(err) {
