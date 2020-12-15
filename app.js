@@ -55,6 +55,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
 
     app.post('/order', (req, res) => {
         var query = req.body
+        console.log(query);
         query.phone = query.phone.replace(/\D/g,'')
 
         console.log("Query: " + query)
@@ -66,7 +67,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             var html = "<!DOCTYPE html>\n" +
                        "<html><head><title>Query Results</title></head>\n<body>"
             if (result.length == 0) {
-                html += "<h1>Order Noods!</h1>\n<h2>Sorry, " + query.fname + ", our query didn't return any results! Please make sure your information is correct and try again, or continue without lookup.</h2>\n"
+                html += "<h1>Order Noods!</h1>\n<h2>Sorry, " + query.fname + ", our query didn't return any results! Please go back and make sure your information is correct and try again, or continue without lookup.</h2>\n"
             }
             else {
                 html += "<h1>Order Noods!</h1>\n<h2>Welcome back, " + query.fname + "! Here are your past orders:</h2>\n"
@@ -85,9 +86,11 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                     "console.log(i + order)\n" +
                     "window.localStorage.setItem('fname', '" + query.fname + "')\n" +
                     "window.localStorage.setItem('lname', '" + query.lname + "')\n" +
-                    "window.localStorage.setItem('phone', '" + query.phone + "')\n" +
-                    "window.localStorage.setItem('email', '" + result[0].email + "')\n" +
-                    "window.localStorage.setItem('order', JSON.stringify(order))\n" +
+                    "window.localStorage.setItem('phone', '" + query.phone + "')\n"
+            if (result.length > 0) {
+                    "window.localStorage.setItem('email', '" + result[0].email + "')\n"
+            }
+            html += "window.localStorage.setItem('order', JSON.stringify(order))\n" +
                     "window.location.href = '/place'" +
                     "}</script>\n<footer>" +
                     "&#169; Copyright 2020 Noods To Go"
@@ -116,13 +119,16 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
     }
 
     app.get('/place', (req, res) => {
+        console.log("start");
         res.write('<!-- Begin stream -->\n')
         fs
         .createReadStream(__dirname + '/place_order.html')
         .pipe(newLineStream())
         .pipe(parser)
         .on('end', () => {
-            res.write('\n<!-- End stream -->')
+            res.write('\n<!-- End stream -->', function(err) {
+                res.end()
+            })
         }).pipe(res)
     })
 
