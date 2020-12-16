@@ -96,6 +96,10 @@ body {
     text-align: center;
 }
 
+li {
+    font-family: "Open Sans";
+}
+
 /* Columns and rows */
 .column {
     flex: 50%;
