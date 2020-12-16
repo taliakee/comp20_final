@@ -46,6 +46,8 @@ body {
 }
 
 .second-div {
+    font-family: 'Exo';
+    text-align: left;
     background-color: #f2f4f3;
     margin-left: 1em;
     margin-right: 1em;
@@ -56,27 +58,56 @@ body {
     padding-bottom: 1em;
 }
 
-.second-div img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 400px;
-}
-
 .second-div h1 {
     text-align: center;
     margin: 0;
-    padding-bottom: 0;
-    font-family: 'Open sans';
+    padding-bottom: .5em;
     font-size: 2em;
+    font-family: 'Open sans';
+    font-weight: normal;
+    color: #000000;
+}
+
+.second-div h2 {
+    margin: 0;
+    padding-bottom: 0;
+    font-size: 1.25em;
+    font-family: 'Open sans';
     font-weight: normal;
     color: #000000;
 }
 
 .second-div p {
-    font-family: 'Open sans';
-    font-size: 1em;
+    padding: 0;
+    font-family: 'Exo';
+    color: #dd1c1a;
+}
+
+form {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.order-div {
+    margin-top: .5em;
+}
+
+button {
+    background-color: #f0c808;
+    border: none;
     color: #000000;
+    font-family: 'Exo';
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin-top: .5em;
+}
+
+button:hover {
+    background-color: #086788;
+    color: #FAF3F6;
 }
 
 footer {

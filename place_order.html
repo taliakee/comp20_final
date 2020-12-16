@@ -2,9 +2,26 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <link rel ='stylesheet' type ='text/css' href='order.css'>
         <title>Place Order</title>
     </head>
     <body>
+        <nav>
+            <div class="topnav">
+                <a href="https://comp20-noods-to-go.herokuapp.com/" class="logo">
+                    <img src="noods_logo.png">
+                </a>
+                <ul> 
+                    <li><a href="https://comp20-noods-to-go.herokuapp.com/">Home</a></li>
+                    <li><a href="https://comp20-noods-to-go.herokuapp.com/about_us">About Us</a></li>
+                    <li><a href="https://comp20-noods-to-go.herokuapp.com/hoursandlocations">Hours & Locations</a></li>
+                    <li><a href="https://comp20-noods-to-go.herokuapp.com/menu">Menu</a></li>
+                    <li><a class="active" href="https://comp20-noods-to-go.herokuapp.com/order">Order</a></li>
+                    <li><a href="https://comp20-noods-to-go.herokuapp.com/reviews">Reviews</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="second-div">
         <script language="javascript">
             function MenuItem(name, cost) {
                 this.name = name;
@@ -31,10 +48,10 @@
 
         <h1>Place Order</h1>
         <form action="/place" method="post">
-            <p>First Name*: <input type="text" name='fname' id='fname' pattern="[A-Za-z]+" required></p>
-            <p>Last Name*:  <input type="text" name='lname' id='lname' pattern="[A-Za-z]+" required></p>
-            <p>Phone Number*: <input type="text" name='phone' id='phone' pattern="[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}" required></p>
-            <p>Email*: <input type="text" name='email' id='email' pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*" required></p>
+            <p>First Name*: <input type="text" name='fname' id='fname' pattern="[A-Za-z]+" required /></p>
+            <p>Last Name*:  <input type="text" name='lname' id='lname' pattern="[A-Za-z]+" required /></p>
+            <p>Phone Number*: <input type="text" name='phone' id='phone' pattern="[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}" required /></p>
+            <p>Email*: <input type="text" name='email' id='email' pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*" required /></p>
             <table id="dishes" border="0" cellpadding="3">
                 <tr>
                     <th>Select Item</th>
@@ -76,6 +93,27 @@
             document.getElementById('phone').value = window.localStorage.getItem('phone')
             document.getElementById('email').value = window.localStorage.getItem('email')
 
+            // message for invalid first name
+            var input = document.getElementById('fname')
+            input.oninvalid = function(event) {
+                event.target.setCustomValidity("Please enter a valid first name")
+            }
+            // message for invalid last name
+            var input = document.getElementById('lname')
+            input.oninvalid = function(event) {
+                event.target.setCustomValidity("Please enter a valid last name")
+            }
+            // message for invalid phone number
+            var input = document.getElementById('phone')
+            input.oninvalid = function(event) {
+                event.target.setCustomValidity("Please enter a valid phone number")
+            }
+            // message for invalid email
+            var input = document.getElementById('email')
+            input.oninvalid = function(event) {
+                event.target.setCustomValidity("Please enter a valid email")
+            }
+
             var rows = document.getElementById("dishes").rows
             var dropdowns = document.getElementsByName("dish")
 
@@ -113,28 +151,8 @@
                 document.getElementById('total').value = (subtotal * 1.0625).toFixed(2)
                 total = (subtotal * 1.0625)
             }
-
-            // message for invalid first name
-            var input = document.getElementById('fname')
-            input.oninvalid = function(event) {
-                event.target.setCustomValidity("Please enter a valid first name")
-            }
-            // message for invalid last name
-            var input = document.getElementById('lname')
-            input.oninvalid = function(event) {
-                event.target.setCustomValidity("Please enter a valid last name")
-            }
-            // message for invalid phone number
-            var input = document.getElementById('phone')
-            input.oninvalid = function(event) {
-                event.target.setCustomValidity("Please enter a valid phone number")
-            }
-            // message for invalid email
-            var input = document.getElementById('email')
-            input.oninvalid = function(event) {
-                event.target.setCustomValidity("Please enter a valid email")
-            }
         </script>
+        </div>
     </body>
     <footer>
         &#169; Copyright 2020 Noods To Go

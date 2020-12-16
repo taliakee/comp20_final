@@ -2,9 +2,10 @@
 <html>
     <head>
         <title>Hours & Locations - Noods To Go</title>
-        <!-- <link rel="stylesheet" href="about_us.css"> -->
+        <link rel="stylesheet" type ="text/css" href="hourslocations.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset = "UTF-8" />
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
         <script
@@ -13,65 +14,79 @@
         ></script>
 
         <style type="text/css">
-            body {
-                background-color: #FAF3F6;
-            }
-
-            html,
-            body {
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-
-            .column {
-                flex: 50%;
-                padding: 5px;
-            }
-
-            /* Clear floats after the columns */
-
-            .row {
-                display: flex;
-            }
-
-            /* Always set the map height explicitly to define the size of the div
+            /* Set the map height to define the size of the div
              * element that contains the map. */
             #googlemap {
                 width: 80%;
                 height: 450px;
             }
-        
-            footer {
-                padding: 15px;
-            }
         </style>
 
         <script>
+            var markers =
+            [
+                [ "Grand Canyon National Park", 36.49379969396841, -112.14262302303716],
+                [ "Halligan Hall", 42.40829867928329, -71.11625667739258 ],
+                [ "Empire State Building", 40.74865993445658, -73.98563221572238],
+                [ "Sydney Opera House", -33.85660618893988, 151.21530742664882 ],
+            ]
+
+            var marker;
+            var len = markers.length;
+            var i = 0;
+
             let map;
 
+            // Initialize and add the map to the page
             function initMap() {
-                map = new google.maps.Map(document.getElementById("googlemap"), {
-                  center: { lat: -34.397, lng: 150.644 },
-                  zoom: 8,
+                // The location of Sydney Opera House
+                const SydneyOperaHouse = { lat: -33.85660618893988, lng: 151.21530742664882 };
+
+                // Create the map
+                const map = new google.maps.Map(document.getElementById("googlemap"), {
+                    zoom: 2,
+                    center: { lat: 34.049, lng: -18.598 },
                 });
+            
+                // Create markers
+                for (i = 0; i < len; i++) {
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(markers[i][1], markers[i][2]),
+                        map: map,
+                        title: markers[i][0],
+                    })
+                }
+
             }
         </script>
     </head>
     <body>
-        <h1 class="title">Noods To Go</h1>
+        <nav>
+            <div class="topnav">
+                <a href="https://comp20-noods-to-go.herokuapp.com/" class="logo">
+                    <img src="noods_logo.png">
+                </a>
+                <ul> 
+                    <li><a href="https://comp20-noods-to-go.herokuapp.com/">Home</a></li>
+                    <li><a href="https://comp20-noods-to-go.herokuapp.com/about_us">About Us</a></li>
+                    <li><a class="active" href="https://comp20-noods-to-go.herokuapp.com/hoursandlocations">Hours & Locations</a></li>
+                    <li><a href="https://comp20-noods-to-go.herokuapp.com/menu">Menu</a></li>
+                    <li><a href="https://comp20-noods-to-go.herokuapp.com/order">Order</a></li>
+                    <li><a href="https://comp20-noods-to-go.herokuapp.com/reviews">Reviews</a></li>
+                </ul>
+            </div>
+        </nav>
         
-        <section id="Hours">
-            <h2 id="Hours">Hours</h2>
-            <ul>
-                <li>Sunday - Thursday: 9 a.m. to 10 p.m.</li>
-                <li>Friday - Saturday: 10 a.m. to 1 a.m.</li>
-            </ul>
-        </section>
+        <div class="content">
+            <div id="hours">
+                <h2 id="hours">Hours</h2>
+                <ul>
+                    <li>Sunday - Thursday: 9 a.m. to 10 p.m.</li>
+                    <li>Friday - Saturday: 10 a.m. to 1 a.m.</li>
+                </ul>
+            </div>
 
-        
-        <section id="Locations">
-            <h2 id="Locations">Locations</h2>
+            <h2 id="locations">Locations</h2>
             <div class="row">
                 <div class="column">
                     <h3>United States</h3>
@@ -126,14 +141,17 @@
                         </ul>
                 </div>
             </div>
-        </section>
+        
 
-        <div align="center">
-            <div id="googlemap"></div>
+            <div align="center">
+                <div id="googlemap">
+                </div>
+            </div>
+
         </div>
 
         <footer>
-           &#169; Copyright 2020 Noods To Go
+            &#169; Copyright 2020 Noods To Go
         </footer>
     </body>
 </html>
@@ -141,5 +159,5 @@
 <!-- GOOGLE MAPS API INFORMATION -->
 <!--
   -- Google Maps API Key: AIzaSyAT9RR3dP9Uuuxmffyx-OyO_X4wl6HIeg8
-  -- https://developers.google.com/maps/documentation/javascript/overview#all
+  -- https://developers.google.com/maps/documentation/javascript/overview
   -->

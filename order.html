@@ -2,19 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel ='stylesheet' type ='text/css' href='order.css'>
     <title>Order Noods!</title>
 </head>
 <body>
+    <nav>
+        <div class="topnav">
+            <a href="https://comp20-noods-to-go.herokuapp.com/" class="logo">
+                <img src="noods_logo.png">
+            </a>
+            <ul> 
+                <li><a href="https://comp20-noods-to-go.herokuapp.com/">Home</a></li>
+                <li><a href="https://comp20-noods-to-go.herokuapp.com/about_us">About Us</a></li>
+                <li><a href="https://comp20-noods-to-go.herokuapp.com/hoursandlocations">Hours & Locations</a></li>
+                <li><a href="https://comp20-noods-to-go.herokuapp.com/menu">Menu</a></li>
+                <li><a class="active" href="https://comp20-noods-to-go.herokuapp.com/order">Order</a></li>
+                <li><a href="https://comp20-noods-to-go.herokuapp.com/reviews">Reviews</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="second-div">
     <h1>Order Noods!</h1>
 
     <h2>Tell us your name and phone number so we can look you up! This will make ordering the same thing you have ordered in the past super easy.</h2>
     <form action="/order" method="POST">
         <label for="fname">First Name*</label><br>
-        <input type="text" name="fname" id="fname" pattern="[A-Za-z]+" required><br>
+        <input type="text" name="fname" id="fname" pattern="[A-Za-z]+" required /><br>
         <label for="lname">Last Name*</label><br>
-        <input type="text" name="lname" id="lname" pattern="[A-Za-z]+" required><br>
+        <input type="text" name="lname" id="lname" pattern="[A-Za-z]+" required /><br>
         <label for="phone">Phone Number*</label><br>
-        <input type="tel" name="phone" id="phone" pattern="[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}" required><br>
+        <input type="tel" name="phone" id="phone" pattern="[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}" required /><br>
 
         <button type="submit">Look me up!</button>
     </form>
@@ -42,6 +59,7 @@
             event.target.setCustomValidity("Please enter a valid phone number")
         }
     </script>
+    </div>
 </body>
 <footer>
     &#169; Copyright 2020 Noods To Go
