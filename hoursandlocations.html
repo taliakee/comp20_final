@@ -25,10 +25,16 @@
         <script>
             var markers =
             [
-                [ "Grand Canyon National Park", 36.49379969396841, -112.14262302303716],
-                [ "Halligan Hall", 42.40829867928329, -71.11625667739258 ],
-                [ "Empire State Building", 40.74865993445658, -73.98563221572238],
-                [ "Sydney Opera House", -33.85660618893988, 151.21530742664882 ],
+                ["Grand Canyon National Park", 36.49379969396841, -112.14262302303716],
+                ["Halligan Hall, Tufts University", 42.40829867928329, -71.11625667739258],
+                ["Empire State Building", 40.74865993445658, -73.98563221572238],
+                ["Mount Rushmore National Memorial", 43.87925714666274, -103.45910961722898],
+                ["Space Needle", 47.62062198535505, -122.3492452152559],
+                ["Eiffel Tower", 48.85849713650987, 2.294513484785873],
+                ["London Eye", 51.503424168566426, -0.11951078634825126],
+                ["Sydney Opera House", -33.85660618893988, 151.21530742664882],
+                ["Great Barrier Reef", -17.55032405178018, 146.87937754593054],
+                ["South Pole", -71.11082740394825, 1.478690420919681],
             ]
 
             var marker;
@@ -45,7 +51,7 @@
                 // Create the map
                 const map = new google.maps.Map(document.getElementById("googlemap"), {
                     zoom: 2,
-                    center: { lat: 34.049, lng: -18.598 },
+                    center: { lat: 30.050, lng: 12.000 },
                 });
             
                 // Create markers
@@ -92,27 +98,51 @@
                     <h3>United States</h3>
                         <h4>Arizona</h4>
                         <ul>
-                            <li>Grand Canyon</li>
+                            <li>
+                                Grand Canyon National Park<br />
+                                Grand Canyon, AZ 86023<br />
+                                United States
+                            </li>
                         </ul>
 
                         <h4>Massachusetts</h4>
                         <ul>
-                            <li>Halligan Hall, Tufts University</li>
+                            <li>
+                                Halligan Hall, Tufts University<br />
+                                161 College Ave<br />
+                                Medford, MA 02155<br />
+                                United States
+                            </li>
                         </ul>
 
                         <h4>New York</h4>
                         <ul>
-                            <li>Empire State Building</li>
+                            <li>
+                                Empire State Building<br />
+                                20 W 34th St<br />
+                                New York, NY 10001<br />
+                                United States
+                            </li>
                         </ul>
 
                         <h4>South Dakota</h4>
                         <ul>
-                            <li>Mount Rushmore</li>
+                            <li>
+                                Mount Rushmore National Memorial<br />
+                                13000 SD-244<br />
+                                Keystone, SD 57751<br />
+                                United States
+                            </li>
                         </ul>
 
                         <h4>Washington</h4>
                         <ul>
-                            <li>Space Needle</li>
+                            <li>
+                                Space Needle<br />
+                                400 Broad St<br />
+                                Seattle, WA 98109<br />
+                                United States
+                            </li>
                         </ul>
                 </div>
 
@@ -120,24 +150,55 @@
                     <h3>Europe</h3>
                         <h4>France</h4>
                         <ul>
-                            <li>Eiffel Tower</li>
+                            <li>
+                                Eiffel Tower<br />
+                                Champ de Mars<br />
+                                5 Avenue Anatole France<br />
+                                75007 Paris<br />
+                                France<br />
+                            </li>
                         </ul>
 
-                    <h3>United Kingdom</h3>
                         <h4>England</h4>
                         <ul>
-                            <li>London Eye</li>
+                            <li>
+                                London Eye<br />
+                                Riverside Building,<br />
+                                County Hall, Bishop's<br />
+                                London SE1 7PB<br />
+                                United Kingdom
+                            </li>
                         </ul>
 
                     <h3>Australia</h3>
                         <h4>New South Wales</h4>
                         <ul>
-                            <li>Sydney Opera House</li>
+                            <li>
+                                Sydney Opera House<br />
+                                Bennelong Point<br />
+                                Sydney NSW 2000<br />
+                                Australia<br />
+                            </li>
                         </ul>
 
                         <h4>Queensland</h4>
                         <ul>
-                            <li>Great Barrier Reef</li>
+                            <li>
+                                Great Barrier Reef<br />
+                                Off the east coast of the<br />
+                                Queensland mainland<br />
+                                Australia
+                            </li>
+                        </ul>
+
+                    <h3>Antarctica</h3>
+                        <ul>
+                            <li>
+                                South Pole<br />
+                                aka the Geographic South Pole<br />
+                                or Terrestrial South Pole,<br />
+                                Antarctica<br />
+                            </li>
                         </ul>
                 </div>
             </div>

@@ -119,12 +119,18 @@ body {
 }
 
 .column {
-    flex: 50%;
-    padding: 5px;
+    display: block;
+    margin-left: 6em;
+    margin-right: 6em;
+    /*justify-content: center;*/
 }
 
 .row {
     display: flex;
+}
+
+#center #googlemap {
+    margin: 10px;
 }
 
 footer {
