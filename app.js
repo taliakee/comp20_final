@@ -32,6 +32,10 @@ app.get('/menu', async (req, res) => {
     res.send(myDishes);
 })
 
+app.get('/reviews', (req, res) => {
+    res.sendFile(__dirname + '/reviews.html');
+})
+
 const url = "mongodb+srv://tkee:varu58Ce@cluster0.egogg.mongodb.net/noodles?retryWrites=true&w=majority"
 
 MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
