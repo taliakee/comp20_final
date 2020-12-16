@@ -26,13 +26,13 @@ async function getDishes()
         // add stylesheet and navbar
         output += "<title>Menu - Noods to Go</title>" +
                     "<link rel ='stylesheet' type ='text/css' href='menu.css'>";
-        output += "<nav><div class='topnav'><a href='https://comp20-noods-to-go.herokuapp.com/' class='logo'><img src='noods_logo.png'></a><ul>" +
-                "<li><a href='https://comp20-noods-to-go.herokuapp.com/'>Home</a></li>" +
-                "<li><a href='https://comp20-noods-to-go.herokuapp.com/about_us'>About Us</a></li>" +
-                "<li><a href='https://comp20-noods-to-go.herokuapp.com/hoursandlocations'>Hours & Locations</a></li>" +
-                "<li><a class='active' href='https://comp20-noods-to-go.herokuapp.com/menu'>Menu</a></li>" +
-                "<li><a href='https://comp20-noods-to-go.herokuapp.com/order'>Order</a></li>" +
-                "<li><a href='https://comp20-noods-to-go.herokuapp.com/reviews'>Reviews</a></li>" +
+        output += "<nav><div class='topnav'><a href='/' class='logo'><img src='noods_logo.png'></a><ul>" +
+                "<li><a href='/'>Home</a></li>" +
+                "<li><a href='/about_us'>About Us</a></li>" +
+                "<li><a href='/hoursandlocations'>Hours & Locations</a></li>" +
+                "<li><a class='active' href='/menu'>Menu</a></li>" +
+                "<li><a href='/order'>Order</a></li>" +
+                "<li><a href='/reviews'>Reviews</a></li>" +
                 "</ul></div></nav>";
         output += "<div class='second-div'>";
         var c = 0;
