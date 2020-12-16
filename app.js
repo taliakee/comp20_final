@@ -65,7 +65,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             console.log("Order query success")
 
             var html = "<!DOCTYPE html>\n" +
-                       "<html><head><title>Query Results</title>" + 
+                       "<html><head><title>Query Results</title>" +
                        "<link rel ='stylesheet' type ='text/css' href='order.css'></head>\n<body>" +
                        "<nav><div class='topnav'><a href='https://comp20-noods-to-go.herokuapp.com/' class='logo'><img src='noods_logo.png'></a><ul>" +
                        "<li><a href='https://comp20-noods-to-go.herokuapp.com/'>Home</a></li>" +
@@ -145,7 +145,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         const order = req.body
 
         var str = "<!DOCTYPE html>\n" +
-                  "<html><head><title>Order Placed</title>" + 
+                  "<html><head><title>Order Placed</title>" +
                   "<link rel ='stylesheet' type ='text/css' href='order.css'></head>\n<body>" +
                   "<nav><div class='topnav'><a href='https://comp20-noods-to-go.herokuapp.com/' class='logo'><img src='noods_logo.png'></a><ul>" +
                   "<li><a href='https://comp20-noods-to-go.herokuapp.com/'>Home</a></li>" +
@@ -154,7 +154,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                   "<li><a href='https://comp20-noods-to-go.herokuapp.com/menu'>Menu</a></li>" +
                   "<li><a class='active' href='https://comp20-noods-to-go.herokuapp.com/order'>Order</a></li>" +
                   "<li><a href='https://comp20-noods-to-go.herokuapp.com/reviews'>Reviews</a></li>" +
-                  "</ul></div></nav><div class='second-div'>"
+                  "</ul></div></nav><div class='second-div'>\n" +
                   "<h1>Thank you for your order!</h1>\n" +
                   "<p>You got:<br>\n"
 
