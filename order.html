@@ -11,7 +11,7 @@
             <a href="https://comp20-noods-to-go.herokuapp.com/" class="logo">
                 <img src="noods_logo.png">
             </a>
-            <ul> 
+            <ul>
                 <li><a href="https://comp20-noods-to-go.herokuapp.com/">Home</a></li>
                 <li><a href="https://comp20-noods-to-go.herokuapp.com/about_us">About Us</a></li>
                 <li><a href="https://comp20-noods-to-go.herokuapp.com/hoursandlocations">Hours & Locations</a></li>
@@ -38,7 +38,7 @@
 
     <h2>You can also continue without looking up past orders:</h2>
     <form action="/place" method="GET">
-        <button type="submit">Continue without lookup</button>
+        <button type="submit" id="continue">Continue without lookup</button>
     </form>
     <br>
 
@@ -57,6 +57,11 @@
         var input = document.getElementById('phone')
         input.oninvalid = function(event) {
             event.target.setCustomValidity("Please enter a valid phone number")
+        }
+
+        var input = document.getElementById('continue')
+        input.onclick = function(event) {
+            window.localStorage.clear()
         }
     </script>
     </div>
