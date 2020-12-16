@@ -25,28 +25,37 @@
         <script>
             var markers =
             [
-                ["Grand Canyon National Park", 36.49379969396841, -112.14262302303716],
-                ["Halligan Hall, Tufts University", 42.40829867928329, -71.11625667739258],
-                ["Empire State Building", 40.74865993445658, -73.98563221572238],
-                ["Mount Rushmore National Memorial", 43.87925714666274, -103.45910961722898],
-                ["Space Needle", 47.62062198535505, -122.3492452152559],
-                ["Eiffel Tower", 48.85849713650987, 2.294513484785873],
-                ["London Eye", 51.503424168566426, -0.11951078634825126],
-                ["Sydney Opera House", -33.85660618893988, 151.21530742664882],
-                ["Great Barrier Reef", -17.55032405178018, 146.87937754593054],
-                ["South Pole", -71.11082740394825, 1.478690420919681],
+                ["Grand Canyon National Park<br /> Grand Canyon, AZ 86023<br /> United States",
+                    36.49379969396841, -112.14262302303716],
+                ["Halligan Hall, Tufts University<br />Medford, MA 02155<br />United States",
+                    42.40829867928329, -71.11625667739258],
+                ["Empire State Building<br />New York, NY 10001<br />United States",
+                    40.74865993445658, -73.98563221572238],
+                ["Mount Rushmore National Memorial<br />Keystone, SD 57751<br />United States",
+                    43.87925714666274, -103.45910961722898],
+                ["Space Needle<br />Seattle, WA 98109<br />United States",
+                    47.62062198535505, -122.3492452152559],
+                ["Eiffel Tower<br />75007 Paris<br />France<br />",
+                    48.85849713650987, 2.294513484785873],
+                ["London Eye<br />London SE1 7PB<br />United Kingdom",
+                    51.503424168566426, -0.11951078634825126],
+                ["Sydney Opera House<br />Sydney NSW 2000<br />Australia<br />",
+                    -33.85660618893988, 151.21530742664882],
+                ["Great Barrier Reef<br />Queensland<br /> Australia",
+                    -17.55032405178018, 146.87937754593054],
+                ["South Pole<br />Antarctica", -71.11082740394825, 1.478690420919681],
             ]
-
-            var marker;
-            var len = markers.length;
-            var i = 0;
 
             let map;
 
             // Initialize and add the map to the page
             function initMap() {
-                // The location of Sydney Opera House
-                const SydneyOperaHouse = { lat: -33.85660618893988, lng: 151.21530742664882 };
+
+                // Declare variables
+                var marker;
+                var len = markers.length;
+                var i = 0;
+                var infowindow = new google.maps.InfoWindow();
 
                 // Create the map
                 const map = new google.maps.Map(document.getElementById("googlemap"), {
@@ -61,8 +70,14 @@
                         map: map,
                         title: markers[i][0],
                     })
-                }
 
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            infowindow.setContent(markers[i][0]);
+                            infowindow.open(map, marker);
+                        }
+                    })(marker, i));
+                }
             }
         </script>
     </head>
